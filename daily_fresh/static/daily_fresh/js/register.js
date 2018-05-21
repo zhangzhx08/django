@@ -47,7 +47,8 @@ $(function(){
 		}
 		else
 		{
-			$.get('user/register_exist/?uname='+$('#user_name').val(),function (data) {
+			$('#user_name').next().hide()
+            $.get('/df_user/register_exist/?regi_name='+$('#user_name').val(),function (data) {
 				if(data.count==1) {
                     $('#user_name').next().html('用户名已存在！').show();
                     error_name = true;
