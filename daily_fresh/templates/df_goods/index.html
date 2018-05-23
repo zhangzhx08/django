@@ -1,0 +1,113 @@
+{% extends 'df_user/base_top.html' %}
+
+
+{% block title %}
+    天天生鲜-主页
+{% endblock title %}
+
+
+{% block head %}
+    <script type="text/javascript" src="/static/daily_fresh/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="/static/daily_fresh/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/static/daily_fresh/js/slide.js"></script>
+{% endblock head %}
+
+
+{% block center %}
+
+	<div class="navbar_con">
+		<div class="navbar">
+			<h1 class="fl">全部商品分类</h1>
+			<ul class="navlist fl">
+				<li><a href="{% url 'df_goods:index' %}">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="center_con clearfix">
+
+        {# 商品分类 #}
+		<ul class="subnav fl">
+            {% for item in categorys %}
+                <li><a href="{% url 'df_goods:list' item.pk 1 %}" class="{{ item.cclass }}">{{ item.ctitle }}</a></li>
+            {% endfor %}
+		</ul>
+
+		<div class="slide fl">
+			<ul class="slide_pics">
+				<li><img src="/static/daily_fresh/images/slide.jpg" alt="幻灯片"></li>
+				<li><img src="/static/daily_fresh/images/slide02.jpg" alt="幻灯片"></li>
+				<li><img src="/static/daily_fresh/images/slide03.jpg" alt="幻灯片"></li>
+				<li><img src="/static/daily_fresh/images/slide04.jpg" alt="幻灯片"></li>
+			</ul>
+			<div class="prev"></div>
+			<div class="next"></div>
+			<ul class="points"></ul>
+		</div>
+		<div class="adv fl">
+			<a href="#"><img src="/static/daily_fresh/images/adv01.jpg"></a>
+			<a href="#"><img src="/static/daily_fresh/images/adv02.jpg"></a>
+		</div>
+	</div>
+
+    {% for category in categorys %}
+
+        <div class="list_model">
+            <div class="list_title clearfix">
+                <h3 class="fl" id="model01">{{ category.ctitle }}</h3>
+                <div class="subtitle fl">
+                    <span>|</span>
+                    {% for item in cate0 %}
+                        <a href="#">{{ item.gtitle }}</a>
+                    {% endfor %}
+                </div>
+                <a href="{% url 'df_goods:list' category.pk 1 %}" class="goods_more fr" id="fruit_more">查看更多 ></a>
+            </div>
+
+            <div class="goods_con clearfix">
+                <div class="goods_banner fl"><img src="/static/media/{{ category.cpic }}"></div>
+                <ul class="goods_list fl">
+                    {% for item in list_click.pop %}
+                        <li>
+                            <h4><a href="{% url 'df_goods:detail' item.pk %}">{{ item.gtitle }}</a></h4>
+                            <a href="{% url 'df_goods:detail' item.pk %}"><img src="/static/media/{{ item.gpic }}"></a>
+                            <div class="prize">¥ {{ item.gprice }}</div>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock center %}
+
+
+{% block script %}
+
+    <script type="text/javascript" src="/static/daily_fresh/js/slideshow.js"></script>
+
+	<script type="text/javascript">
+
+		BCSlideshow('focuspic');
+		var oFruit = document.getElementById('fruit_more');
+		var oShownum = document.getElementById('show_count');
+
+		var hasorder = localStorage.getItem('order_finish');
+
+		if(hasorder)
+		{
+			oShownum.innerHTML = '2';
+		}
+
+		oFruit.onclick = function(){
+			window.location.href = 'list.html';
+		}
+	</script>
+{% endblock script %}
+

@@ -1,0 +1,69 @@
+{% extends 'df_user/base_footer.html' %}
+
+{% block body%}
+
+    <div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到天天生鲜!</div>
+			<div class="fr">
+				<div class="login_info fl">
+					欢迎您：<em>张 山</em>
+				</div>
+				<div class="login_btn fl">
+					<a href="{% url 'df_user:login' %}">登录</a>
+					<span>|</span>
+					<a href="{% url 'df_user:register' %}">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{% url 'df_user:user_center_info' %}">用户中心</a>
+					<span>|</span>
+					<a href="{% url 'df_cart:cart' %}">我的购物车</a>
+					<span>|</span>
+					<a href="{% url 'df_user:user_center_order' %}">我的订单</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="search_bar clearfix">
+        <a href="{% url 'df_goods:index' %}" class="logo fl"><img src="/static/daily_fresh/images/logo.png"></a>
+
+        {% if font_flag != 'goods' %}
+            <div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;
+                {% if font_flag == 'user_center' %}
+                    用户中心
+                {% endif %}
+                {% if font_flag == 'cart' %}
+                    购物车
+                {% endif %}
+                {% if font_flag == 'place_order' %}
+                    提交订单
+                {% endif %}
+            </div>
+
+            <div class="search_con fr">
+                <input type="text" class="input_text fl" name="" placeholder="搜索商品">
+                <input type="button" class="input_btn fr" name="" value="搜索">
+            </div>
+
+        {% else %}
+
+            <div class="search_con fl">
+			    <input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			    <input type="button" class="input_btn fr" name="" value="搜索">
+		    </div>
+            <div class="guest_cart fr">
+                <a href="{% url 'df_cart:cart' %}" class="cart_name fl">我的购物车</a>
+                <div class="goods_count fl" id="show_count">1</div>
+            </div>
+        {% endif %}
+    </div>
+
+
+    {% block center %}
+
+    {% endblock %}
+
+
+{% endblock body%}

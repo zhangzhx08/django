@@ -18,6 +18,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^shopping/', include('shopping.urls', namespace='shopping')),
     url(r'^df_user/', include('df_user.urls', namespace='df_user')),
+    url(r'^df_goods/', include('df_goods.urls', namespace='df_goods')),
+    url(r'^df_cart/', include('df_cart.urls', namespace='df_cart')),
+    url(r'^df_order/', include('df_order.urls', namespace='df_order')),
+
 ]

@@ -37,8 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shopping',
     'df_user',
+    'df_goods',
+    'df_cart',
+    'df_order',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -130,6 +133,14 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/')
 ]
 
+# 开发阶段的上传目录
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media/')
+# 部署后的上传文件目录
+# MEDIA_ROOT = '/var/www/daily_fresh/static/'
+
+# MEDIA_URL与MEDIA_ROOT必须保持一直，这样在后台上传的图片才能被准确的找到
+MEDIA_URL = '/static/media/'
+
 SESSION_ENGINE = 'redis_sessions.session'
 SESSION_REDIS_HOST = 'localhost'
 SESSION_REDIS_PORT = 6379
@@ -144,4 +155,11 @@ CACHES = {
         "LOCATION": "localhost:6379",
         'TIMEOUT': 60,
     },
+}
+
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'advanced',
+    'width': 600,
+    'height': 300,
 }

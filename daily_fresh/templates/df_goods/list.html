@@ -1,0 +1,114 @@
+{% extends 'df_user/base_top.html' %}
+
+{% block title %}
+    天天生鲜-商品列表
+{% endblock %}
+
+
+{% block center %}
+
+    <div class="navbar_con">
+		<div class="navbar clearfix">
+
+            {# 商品分类 #}
+			<div class="subnav_con fl">
+				<h1>全部商品分类</h1>
+				<span></span>
+				<ul class="subnav">
+                    {% for item in categorys %}
+                        <li>
+                            <a href="{% url 'df_goods:list' item.pk 1 %}" class="{{ item.cclass }}">
+                                {{ item.ctitle }}
+                            </a>
+                        </li>
+                    {% endfor %}
+				</ul>
+			</div>
+
+            <ul class="navlist fl">
+				<li><a href="{% url 'df_goods:index' %}">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+
+    {# 页面导航 #}
+	<div class="breadcrumb">
+		<a href="javascript:;">全部分类</a>
+		<span>></span>
+		<a href="javascript:;">{{ category.ctitle }}</a>
+	</div>
+
+	<div class="main_wrap clearfix">
+
+        {# 商品推荐 #}
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+				<ul>
+                    {% for item in cate00 %}
+                        <li>
+                            <a href="{% url 'df_goods:detail' item.pk %}"><img src="/static/media/{{ item.gpic }}"></a>
+                            <h4><a href="{% url 'df_goods:detail' item.pk %}">{{ item.gtitle }}</a></h4>
+                            <div class="prize">￥{{ item.gprice }}</div>
+                        </li>
+                    {% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div class="r_wrap fr clearfix">
+			<div class="sort_bar">
+				<a href="#" class="active">默认</a>
+				<a href="#">价格</a>
+				<a href="#">人气</a>
+			</div>
+
+            {# 商品列表 #}
+			<ul class="goods_type_list clearfix">
+                {% for goods in page %}
+                    <li>
+                        <a href="{% url 'df_goods:detail' goods.pk %}"><img src="/static/media/{{ goods.gpic }}"></a>
+                        <h4><a href="{% url 'df_goods:detail' goods.pk %}">{{ goods.gtitle }}</a></h4>
+                        <div class="operate">
+                            <span class="prize">￥{{ goods.gprice }}</span>
+                            <span class="unit">{{ goods.gprice }}/{{ goods.gunit }}</span>
+                            <a href="#" class="add_goods" title="加入购物车"></a>
+                        </div>
+                    </li>
+                {% endfor %}
+
+			</ul>
+
+            {# 底部页码 #}
+			<div class="pagenation">
+                {% if page.has_previous %}
+                    <a href="{% url 'df_goods:list' category.pk page.number|add:-1 %}">< 上一页</a>
+                {% else %}
+                    <a href="javascript:;">< 上一页</a>
+                {% endif %}
+
+                {% for index in page.paginator.page_range %}
+                    {% if page.number == index %}
+                        <a href="javascript:;" class="active">{{ index }}</a>
+                    {% else %}
+                        <a href="{% url 'df_goods:list' category.pk index %}">{{ index }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page.has_next %}
+                    <a href="{% url 'df_goods:list' category.pk page.number|add:1 %}">下一页 ></a>
+                {% else %}
+                    <a href="javascript:;">下一页 ></a>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+

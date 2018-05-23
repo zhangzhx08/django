@@ -127,14 +127,15 @@ def user_center_info(request):
     uemail = user.uemail
     uphone = user.uphone
     uaddress = user.uaddress
-    context = {'uemail': uemail, 'uname': uname, 'uphone': uphone, 'uaddress': uaddress}
+    context = {'uemail': uemail, 'uname': uname, 'uphone': uphone, 'uaddress': uaddress, 'font_flag': 'user_center'}
     return render(request, 'df_user/user_center_info.html', context)
 
 
 # 用户中心——用户订单
 @is_login
 def user_center_order(request):
-    return render(request, 'df_user/user_center_order.html')
+    context = {'font_flag': 'user_center'}
+    return render(request, 'df_user/user_center_order.html', context)
 
 
 def site_haddle(request):
@@ -164,5 +165,5 @@ def user_center_site(request):
     saddress = site.saddress
     spostcode = site.spostcode
     # 构建Json数据
-    context = {'sperson': sperson, 'sphone': sphone, 'saddress': saddress, 'spostcode': spostcode}
+    context = {'sperson': sperson, 'sphone': sphone, 'saddress': saddress, 'spostcode': spostcode, 'font_flag': 'user_center'}
     return render(request, 'df_user/user_center_site.html', context)
