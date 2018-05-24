@@ -17,11 +17,11 @@ html,body{height:100%}
 	line-height:29px;
 }
 
-.login_info{
-	display:none;
-}
+/*.login_info{*/
+	/*display:none;*/
+/*}*/
 
-.login_info em{color:#ff8800}
+/*.login_info em{color:#ff8800}*/
 
 .login_btn a,.user_link a{
 	color:#666;
@@ -30,6 +30,9 @@ html,body{height:100%}
 .login_btn a:hover,.user_link a:hover{
 	color:#ff8800;
 }
+
+/*新增css*/
+.login_btn em{color:#ff8800}
 
 .login_btn span,.user_link span{
 	color:#cecece;

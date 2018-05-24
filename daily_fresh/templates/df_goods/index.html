@@ -32,8 +32,12 @@
 
         {# 商品分类 #}
 		<ul class="subnav fl">
-            {% for item in categorys %}
-                <li><a href="{% url 'df_goods:list' item.pk 1 %}" class="{{ item.cclass }}">{{ item.ctitle }}</a></li>
+            {% for category in categorys %}
+                <li>
+                    <a href="{% url 'df_goods:list' category.pk 'default' 1 %}" class="{{ category.cclass }}">
+                        {{ category.ctitle }}
+                    </a>
+                </li>
             {% endfor %}
 		</ul>
 
@@ -61,11 +65,13 @@
                 <h3 class="fl" id="model01">{{ category.ctitle }}</h3>
                 <div class="subtitle fl">
                     <span>|</span>
-                    {% for item in cate0 %}
+                    {% for item in list_pk %}
                         <a href="#">{{ item.gtitle }}</a>
                     {% endfor %}
                 </div>
-                <a href="{% url 'df_goods:list' category.pk 1 %}" class="goods_more fr" id="fruit_more">查看更多 ></a>
+                <a href="{% url 'df_goods:list' category.pk 'default' 1 %}" class="goods_more fr" id="fruit_more">
+                    查看更多 >
+                </a>
             </div>
 
             <div class="goods_con clearfix">
@@ -90,7 +96,7 @@
 
 {% block script %}
 
-    <script type="text/javascript" src="/static/daily_fresh/js/slideshow.js"></script>
+    <script type="text/javascript" src="/static/daily_fresh/js/slide.js"></script>
 
 	<script type="text/javascript">
 

@@ -6,13 +6,18 @@
 		<div class="header">
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
 			<div class="fr">
-				<div class="login_info fl">
-					欢迎您：<em>张 山</em>
-				</div>
 				<div class="login_btn fl">
-					<a href="{% url 'df_user:login' %}">登录</a>
-					<span>|</span>
-					<a href="{% url 'df_user:register' %}">注册</a>
+                    <a href="{% url 'df_goods:index' %}">首页</a>
+                    <span>|</span>
+                    {% if request.session.uname|default:'' == '' %}
+                        <a href="{% url 'df_user:login' %}">登录</a>
+                        <span>|</span>
+                        <a href="{% url 'df_user:register' %}">注册</a>
+                    {% else %}
+                        欢迎您：<em>{{ request.session.uname }}</em>
+                        <span>|</span>
+                        <a href="{% url 'df_user:logout' %}">退出</a>
+                    {% endif %}
 				</div>
 				<div class="user_link fl">
 					<span>|</span>

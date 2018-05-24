@@ -2,6 +2,7 @@
 
 from django.shortcuts import render, redirect
 from .models import *
+from df_goods.models import *
 from django.http import request, HttpResponse, JsonResponse, response
 from django.core.urlresolvers import reverse
 from hashlib import sha1
@@ -75,7 +76,9 @@ def login_handle(request):
         upwd_sha = s.hexdigest()
         # 判断密码是否正确
         if upwd_sha == users[0].upwd:
-            redi = redirect(reverse('df_user:user_center_info'))
+            # 获取发起请求的原页面地址,并重定向
+            url = request.COOKIES.get('request_url', reverse('df_goods:index'))
+            redi = redirect(url)
             # 设置cookie，记住用户名
             if remember == '1':
                 redi.set_cookie('uname', uname)
@@ -107,27 +110,53 @@ def login_handle(request):
         return redi
 
 
-# 判断是否登录
+# 判断是否登录的装饰器
 def is_login(func):
     def login_func(request, *args, **kwargs):
+        # 若已登录则继续执行原视图
         if request.session.get('user_id'):
             return func(request, *args, **kwargs)
+        # 若未登录，则重定向到登录页面
         else:
             redi = redirect(reverse('df_user:login'))
-            redi.set_cookie('url', request.get_full_path)
+            # 设置cookie保存原来的页面地址
+            redi.set_cookie('request_url', request.get_full_path())
             return redi
     return login_func
+
+
+# 退出登录
+def logout(request):
+    request.session.flush()
+    return redirect(reverse('df_goods:index'))
 
 
 # 用户中心——用户信息
 @is_login
 def user_center_info(request):
+    # 根据session保存的user_id获取user对象,以及相关信息
     user = UserInfo.objects.get(id=request.session['user_id'])
     uname = request.session['uname']
     uemail = user.uemail
     uphone = user.uphone
     uaddress = user.uaddress
-    context = {'uemail': uemail, 'uname': uname, 'uphone': uphone, 'uaddress': uaddress, 'font_flag': 'user_center'}
+    # 获取最近浏览商品id列表
+    goods_id_list_str = request.COOKIES.get('goods_id_list')
+    goods_id_list = []
+    goods_list = []
+    if goods_id_list_str:
+        goods_id_list = goods_id_list_str.split(',')
+    for id in goods_id_list:
+        goods_list.append(GoodsInfo.objects.get(pk=id))
+    # 构造Json数据
+    context = {
+        'font_flag': 'user_center',
+        'uemail': uemail,
+        'uname': uname,
+        'uphone': uphone,
+        'uaddress': uaddress,
+        'goods_list': goods_list,
+    }
     return render(request, 'df_user/user_center_info.html', context)
 
 
@@ -165,5 +194,11 @@ def user_center_site(request):
     saddress = site.saddress
     spostcode = site.spostcode
     # 构建Json数据
-    context = {'sperson': sperson, 'sphone': sphone, 'saddress': saddress, 'spostcode': spostcode, 'font_flag': 'user_center'}
+    context = {
+        'font_flag': 'user_center',
+        'sperson': sperson,
+        'sphone': sphone,
+        'saddress': saddress,
+        'spostcode': spostcode,
+    }
     return render(request, 'df_user/user_center_site.html', context)

@@ -62,10 +62,10 @@
 				<h1>全部商品分类</h1>
 				<span></span>
 				<ul class="subnav">
-                    {% for item in categorys %}
+                    {% for category in categorys %}
                         <li>
-                            <a href="{% url 'df_goods:list' item.pk 1 %}" class="{{ item.cclass }}">
-                                {{ item.ctitle }}
+                            <a href="{% url 'df_goods:list' category.pk 'default' 1 %}" class="{{ category.cclass }}">
+                                {{ category.ctitle }}
                             </a>
                         </li>
                     {% endfor %}
