@@ -4,9 +4,161 @@
     天天生鲜-购物车
 {% endblock title %}
 
+
+{% block head %}
+    <script type="text/javascript" src="/static/daily_fresh/js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+
+            {# 点击加号，数量加1 #}
+            function add(elem){
+                var count = elem.next().val();
+                elem.next().val(parseInt(count)+1);
+            }
+
+            {# 点击减号，数量减1 #}
+            function minus(elem){
+                var count = elem.prev().val();
+                if(parseInt(count)>1){
+                    elem.prev().val(parseInt(count)-1);
+                }
+            }
+
+            {# 计算小计、总价 #}
+            function calculate_totle(){
+                {# 定义小计、总计变量 #}
+                var subtotle = 0;
+                var totle = 0;
+                {# 计算小计、总结 #}
+                $('.col07').each(function () {
+                    {# 获取该商品价格 #}
+                    var price = $(this).siblings('.col05').children('em').text();
+                    {# 获取该商品数量 #}
+                    var count = $(this).prev().children().children('input').val();
+                    {# 计算小计 #}
+                    subtotle = parseFloat(price)*parseInt(count);
+                    {# 填充小计 #}
+                    $(this).text(subtotle.toFixed(2)+'元');
+                    {# 计算总价 #}
+                    if($(this).siblings('.col01').children('input').prop('checked')){
+                        totle += subtotle;
+                    }
+                });
+                {# 填充总价 #}
+                $('#totle').text(totle.toFixed(2));
+            }
+
+            {# 更新数据库 #}
+            function update_sql(elem){
+                var goods_id = elem.parents('.cart_list_td').attr('id');
+                var count = elem.val();
+                {# 踩坑：使用标签反向解析，会设计replace替换，有一个参数时没有问题 #}
+                {# 但是有两个数字参数时，会发生前一个数字替换后的内容，再被第二个数字替换时会被误替换 #}
+                {# 所以还是建议使用原始url，避免此类发生误替换 #}
+                {#url = '{% url 'df_cart:cart_edit' 1 2 %}'.replace('1', goods_id).replace('1', count)#}
+                var url = '/df_cart/cart_edit/'+goods_id+'/'+count+'/';
+                $.get(url);
+            }
+
+            {# 检验用户输入是否是大于0的数字,若不是，默认为1 #}
+            function check_count(elem){
+                var re = /^[1-9]\d*$/;
+                if( re.test(elem.val()) === false){
+                    elem.val(1)
+                }
+            }
+
+            {# 维护购物车商品总数 #}
+            function calculate_totle_count(){
+                {# 踩坑啦：$('.class').text()的结果是全部匹配元素字符内容加和成的新字符串 #}
+                var length = parseInt($('.totle_goods_count').text())-1;
+                $('.totle_goods_count').text(length);
+            }
+
+            {# 维护购物车被选中的商品数量 #}
+            function calculate_selected_count(){
+                var selected_count = $(':checked:not(#check_all)').length;
+                $('#selected_goods_count').text(selected_count);
+            }
+
+            calculate_totle();
+
+            {# 加号按钮绑定click事件 #}
+            $('.add').click(function () {
+                {# 调用方法#}
+                add($(this));
+                {# 模拟输入框失去焦点，触发相应事件 #}
+                $(this).next().blur();
+            });
+
+            {# 减号按钮绑定click事件 #}
+            $('.minus').click(function () {
+                {# 调用minus方法 #}
+                minus($(this));
+                {# 模拟输入框失去焦点，触发相应事件 #}
+                $(this).prev().blur();
+            });
+
+            {# input框绑定失去焦点事件 #}
+            $('.num_show').blur(function () {
+                {# 检验输入内容是否为大于0的数字 #}
+                check_count($(this));
+                {# 更新数据库#}
+                update_sql($(this));
+                {# 调用函数 #}
+                calculate_totle();
+
+            });
+
+            {# 全选、全取消功能 #}
+            $('#check_all').click(function () {
+                var status = $(this).prop('checked');
+                $(':checkbox:not(#check_all)').prop('checked', status);
+                calculate_totle();
+                calculate_selected_count();
+            });
+
+            {# 选择后重新计算总价 #}
+            $(':checkbox:not(#check_all)').click(function () {
+                if($(this).prop('checked')){
+                    if($(':checked').length+1 === $(':checkbox').length){
+                        $('#check_all').prop('checked', true);
+                    }
+                }else{
+                    $('#check_all').prop('checked', false);
+                }
+                calculate_totle();
+                calculate_selected_count();
+            });
+
+            {# 删除购物车商品 #}
+            $('.col08').click(function () {
+                var goods_id = $(this).parents('.cart_list_td').attr('id');
+                var url = '{% url 'df_cart:cart_delete' 1 %}'.replace('1', goods_id);
+                {# 发送jquery请求，并执行回调函数 #}
+                $.get(url, function (data) {
+                    if(data.is_delete){
+                        {# 需要删除的商品div向上收起后，执行回调函数，删除并重新计算总价 #}
+                        $('#'+goods_id).slideUp(function () {
+                            {# 在回调函数内，$(this)就指回调函数执行者 #}
+                            $(this).remove();
+                            calculate_totle();
+                            calculate_totle_count();
+                            calculate_selected_count();
+                        });
+                    }
+                });
+            })
+        });
+
+    </script>
+{% endblock head %}
+
+
 {% block center %}
 
-    <div class="total_count">全部商品<em>2</em>件</div>
+    <div class="total_count">全部商品<em class="totle_goods_count">{{ length }}</em>件</div>
+    {# 商品列表表头 #}
 	<ul class="cart_list_th clearfix">
 		<li class="col01">商品名称</li>
 		<li class="col02">商品单位</li>
@@ -15,46 +167,38 @@
 		<li class="col05">小计</li>
 		<li class="col06">操作</li>
 	</ul>
-	<ul class="cart_list_td clearfix">
-		<li class="col01"><input type="checkbox" name="" checked></li>
-		<li class="col02"><img src="/static/daily_fresh/images/goods/goods012.jpg"></li>
-		<li class="col03">奇异果<br><em>25.80元/500g</em></li>
-		<li class="col04">500g</li>
-		<li class="col05">25.80元</li>
-		<li class="col06">
-			<div class="num_add">
-				<a href="javascript:;" class="add fl">+</a>
-				<input type="text" class="num_show fl" value="1">
-				<a href="javascript:;" class="minus fl">-</a>
-			</div>
-		</li>
-		<li class="col07">25.80元</li>
-		<li class="col08"><a href="javascript:;">删除</a></li>
-	</ul>
 
-	<ul class="cart_list_td clearfix">
-		<li class="col01"><input type="checkbox" name="" checked></li>
-		<li class="col02"><img src="/static/daily_fresh/images/goods/goods003.jpg"></li>
-		<li class="col03">大兴大棚草莓<br><em>16.80元/500g</em></li>
-		<li class="col04">500g</li>
-		<li class="col05">16.80元</li>
-		<li class="col06">
-			<div class="num_add">
-				<a href="javascript:;" class="add fl">+</a>
-				<input type="text" class="num_show fl" value="1">
-				<a href="javascript:;" class="minus fl">-</a>
-			</div>
-		</li>
-		<li class="col07">16.80元</li>
-		<li class="col08"><a href="javascript:;">删除</a></li>
-	</ul>
+    {% for cart in cart_list %}
 
+        {# 购物车商品列表 #}
+        <ul class="cart_list_td clearfix" id="{{ cart.goods_id }}">
+            <li class="col01"><input type="checkbox"></li>
+            <li class="col02"><img src="/static/media/{{ cart.goods.gpic }}"></li>
+            <li class="col03">{{ cart.goods.gtitle }}<br><em>{{ cart.goods.gprice }}</em>元/{{ cart.goods.gunit }}</li>
+            <li class="col04">{{ cart.goods.gunit }}</li>
+            <li class="col05"><em>{{ cart.goods.gprice }}</em>元</li>
+            <li class="col06">
+                <div class="num_add">
+                    <a href="javascript:;" class="add fl">+</a>
+                    <input type="text" class="num_show fl" value="{{ cart.count }}">
+                    <a href="javascript:;" class="minus fl">-</a>
+                </div>
+            </li>
+            <li class="col07 subtotle"> </li>
+            <li class="col08"><a href="javascript:;">删除</a></li>
+        </ul>
+    {% endfor %}
 
 	<ul class="settlements">
-		<li class="col01"><input type="checkbox" name="" checked=""></li>
+		<li class="col01"><input type="checkbox" name="is_checked" id="check_all"></li>
 		<li class="col02">全选</li>
-		<li class="col03">合计(不含运费)：<span>¥</span><em>42.60</em><br>共计<b>2</b>件商品</li>
-		<li class="col04"><a href="{% url 'df_order:place_order' %}">去结算</a></li>
+		<li class="col03">
+            合计(不含运费)：<span>¥</span><em id="totle"></em><br>
+            共计<b id="selected_goods_count">0</b>件商品
+        </li>
+		<li class="col04">
+            <a href="{% url 'df_order:place_order' %}">去结算</a>
+        </li>
 	</ul>
 
 {% endblock center %}

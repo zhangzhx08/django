@@ -7,7 +7,6 @@
 
 
 {% block head %}
-    <script type="text/javascript" src="/static/daily_fresh/js/jquery-1.12.4.min.js"></script>
 	<script type="text/javascript" src="/static/daily_fresh/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/static/daily_fresh/js/slide.js"></script>
 {% endblock head %}
@@ -65,7 +64,7 @@
                 <h3 class="fl" id="model01">{{ category.ctitle }}</h3>
                 <div class="subtitle fl">
                     <span>|</span>
-                    {% for item in list_pk %}
+                    {% for item in list_by_pk %}
                         <a href="#">{{ item.gtitle }}</a>
                     {% endfor %}
                 </div>
@@ -77,7 +76,7 @@
             <div class="goods_con clearfix">
                 <div class="goods_banner fl"><img src="/static/media/{{ category.cpic }}"></div>
                 <ul class="goods_list fl">
-                    {% for item in list_click.pop %}
+                    {% for item in list_by_click.pop %}
                         <li>
                             <h4><a href="{% url 'df_goods:detail' item.pk %}">{{ item.gtitle }}</a></h4>
                             <a href="{% url 'df_goods:detail' item.pk %}"><img src="/static/media/{{ item.gpic }}"></a>

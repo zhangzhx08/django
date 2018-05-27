@@ -3,18 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="9f801dd4-78cd-493b-98ea-1d644175fda1" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daily_fresh/df_goods/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_goods/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daily_fresh/df_cart/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_cart/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daily_fresh/df_cart/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_cart/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daily_fresh/df_cart/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_cart/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daily_fresh/df_cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_cart/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daily_fresh/df_goods/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_goods/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daily_fresh/df_user/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_user/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daily_fresh/df_user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_user/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daily_fresh/df_user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/df_user/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daily_fresh/static/daily_fresh/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/static/daily_fresh/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daily_fresh/static/daily_fresh/js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/static/daily_fresh/js/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daily_fresh/templates/df_cart/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/templates/df_cart/cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daily_fresh/templates/df_goods/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/templates/df_goods/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daily_fresh/templates/df_goods/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/templates/df_goods/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daily_fresh/templates/df_goods/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/templates/df_goods/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daily_fresh/templates/df_user/base_footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/templates/df_user/base_footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daily_fresh/templates/df_user/base_top.html" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/templates/df_user/base_top.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daily_fresh/templates/df_user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/templates/df_user/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daily_fresh/templates/df_user/user_center_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/daily_fresh/templates/df_user/user_center_info.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,24 +25,27 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/django$venv.coverage" NAME="venv Coverage Results" MODIFIED="1527312344596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/daily_fresh/daily_fresh/settings.py">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/daily_fresh/df_cart/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="171">
+              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/daily_fresh/df_goods/urls.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+            <state relative-caret-position="-304">
+              <caret line="137" column="52" selection-start-line="137" selection-start-column="52" selection-end-line="137" selection-end-column="52" />
               <folding>
-                <element signature="e#24#56#0" expanded="true" />
+                <element signature="e#24#69#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,10 +54,19 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/daily_fresh/df_goods/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="68" column="38" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
+            <state relative-caret-position="342">
+              <caret line="25" column="56" selection-start-line="25" selection-start-column="56" selection-end-line="25" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/daily_fresh/df_cart/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="403">
+              <caret line="81" column="40" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
               <folding>
-                <element signature="e#24#69#0" expanded="true" />
+                <element signature="e#0#45#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -62,25 +76,16 @@
         <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="171">
-              <caret line="9" column="54" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="list.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/daily_fresh/static/daily_fresh/css/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="199" column="22" selection-start-line="199" selection-start-column="22" selection-end-line="199" selection-end-column="22" />
+            <state relative-caret-position="1852">
+              <caret line="118" selection-start-line="118" selection-end-line="118" />
             </state>
           </provider>
         </entry>
@@ -88,17 +93,26 @@
       <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+            <state relative-caret-position="171">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="register.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/daily_fresh/static/daily_fresh/js/register.js">
+      <file leaf-file-name="base_top.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/base_top.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+            <state relative-caret-position="384">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cart.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_cart/cart.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="146" column="54" selection-start-line="146" selection-start-column="54" selection-end-line="146" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -124,6 +138,15 @@
       <find>focuspic</find>
       <find>category.pk</find>
       <find>sort</find>
+      <find>META</find>
+      <find>/*</find>
+      <find>*/</find>
+      <find>totle_checked</find>
+      <find>cart_haddle</find>
+      <find>.totle_count</find>
+      <find>list_click</find>
+      <find>list_pk</find>
+      <find>goods_id_list</find>
     </findStrings>
     <replaceStrings>
       <replace>/static/daily_fresh/js/</replace>
@@ -131,6 +154,12 @@
       <replace>/static/daily_fresh/images/</replace>
       <replace>category.pk</replace>
       <replace />
+      <replace>{#</replace>
+      <replace>#}</replace>
+      <replace>check_all</replace>
+      <replace>cart_add</replace>
+      <replace>list_by_click</replace>
+      <replace>list_by_pk</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/daily_fresh/static/daily_fresh</dir>
@@ -142,23 +171,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/daily_fresh/df_user/models.py" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/index1.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/index2.html" />
-        <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/base_footer.html" />
         <option value="$PROJECT_DIR$/daily_fresh/daily_fresh/urls.py" />
-        <option value="$PROJECT_DIR$/daily_fresh/df_cart/urls.py" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/base_goods.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/list1.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/detail2.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_cart/cart1.html" />
-        <option value="$PROJECT_DIR$/daily_fresh/df_cart/views.py" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/base_user_top.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/user_center_order.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/user_center_site.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_order/place_order1.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_order/place_order.html" />
-        <option value="$PROJECT_DIR$/daily_fresh/templates/df_cart/cart.html" />
         <option value="$PROJECT_DIR$/daily_fresh/df_order/urls.py" />
         <option value="$PROJECT_DIR$/daily_fresh/df_order/views.py" />
         <option value="$PROJECT_DIR$/daily_fresh/daily_fresh/settings.py" />
@@ -167,20 +191,33 @@
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/login.html" />
         <option value="$PROJECT_DIR$/daily_fresh/df_user/urls.py" />
         <option value="$PROJECT_DIR$/daily_fresh/static/daily_fresh/css/main.css" />
-        <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/base_top.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/user_center_info.html" />
-        <option value="$PROJECT_DIR$/daily_fresh/df_user/views.py" />
         <option value="$PROJECT_DIR$/daily_fresh/df_goods/urls.py" />
-        <option value="$PROJECT_DIR$/daily_fresh/df_goods/views.py" />
-        <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/detail.html" />
-        <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/index.html" />
+        <option value="$PROJECT_DIR$/daily_fresh/df_cart/models.py" />
+        <option value="$PROJECT_DIR$/daily_fresh/df_user/models.py" />
         <option value="$PROJECT_DIR$/daily_fresh/static/daily_fresh/js/register.js" />
+        <option value="$PROJECT_DIR$/daily_fresh/df_goods/views.py" />
+        <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/index.html" />
+        <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/detail.html" />
+        <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/base_footer.html" />
+        <option value="$PROJECT_DIR$/daily_fresh/templates/df_user/base_top.html" />
         <option value="$PROJECT_DIR$/daily_fresh/templates/df_goods/list.html" />
+        <option value="$PROJECT_DIR$/daily_fresh/df_cart/urls.py" />
+        <option value="$PROJECT_DIR$/daily_fresh/df_cart/admin.py" />
+        <option value="$PROJECT_DIR$/daily_fresh/templates/df_cart/cart.html" />
+        <option value="$PROJECT_DIR$/daily_fresh/df_cart/views.py" />
+        <option value="$PROJECT_DIR$/daily_fresh/df_user/views.py" />
       </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
@@ -218,12 +255,24 @@
               <item name="django" type="b2602c69:ProjectViewProjectNode" />
               <item name="django" type="462c0819:PsiDirectoryNode" />
               <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
+              <item name="df_cart" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="django" type="462c0819:PsiDirectoryNode" />
+              <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
               <item name="df_goods" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="django" type="b2602c69:ProjectViewProjectNode" />
               <item name="django" type="462c0819:PsiDirectoryNode" />
               <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
+              <item name="df_user" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="django" type="462c0819:PsiDirectoryNode" />
+              <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -239,7 +288,7 @@
               <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="django" type="b2602c69:ProjectViewProjectNode" />
@@ -252,7 +301,21 @@
               <item name="django" type="462c0819:PsiDirectoryNode" />
               <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="df_cart" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="django" type="462c0819:PsiDirectoryNode" />
+              <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="df_goods" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="django" type="b2602c69:ProjectViewProjectNode" />
+              <item name="django" type="462c0819:PsiDirectoryNode" />
+              <item name="daily_fresh" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="df_user" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -267,7 +330,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.maddyhome.idea.vim.ui.VimEmulationConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -303,7 +366,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="11" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.329806" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1989206" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -325,7 +388,7 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22898997" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -333,14 +396,14 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="R Graphics" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.329806" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="right" id="R Packages" order="3" />
       <window_info anchor="bottom" id="Python Console" order="11" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329806" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="right" id="SciView" order="5" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -355,33 +418,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/daily_fresh/uwsgi.pid">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_goods/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="56" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2489">
-          <caret line="137" selection-start-line="137" selection-end-line="137" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/list.html" />
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/detail.html" />
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/index.html" />
@@ -405,24 +441,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/index1.html" />
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/index2.html" />
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/list1.html" />
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/detail2.html" />
-    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/base_footer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="37" column="18" selection-start-line="37" selection-start-column="18" selection-end-line="37" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_cart/cart1.html" />
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/base_user_top.html" />
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/user_center_order.html">
@@ -441,20 +463,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/base_goods.html" />
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_order/place_order1.html" />
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_cart/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_cart/cart.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="56" column="62" selection-start-line="56" selection-start-column="62" selection-end-line="56" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/df_order/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -469,24 +477,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_cart/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_order/place_order.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1615">
           <caret line="85" column="9" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -504,9 +498,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -517,40 +508,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
-          <folding>
-            <element signature="e#24#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/daily_fresh/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_goods/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
-          <folding>
-            <element signature="e#24#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/daily_fresh/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="494">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
@@ -561,78 +525,172 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="149" column="46" selection-start-line="149" selection-start-column="46" selection-end-line="149" selection-end-column="46" />
-          <folding>
-            <element signature="e#24#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/uwsgi.ini">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/df_goods/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-          <folding>
-            <element signature="e#24#56#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/uwsgi.ini">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/base_top.html">
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        <state relative-caret-position="95">
+          <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/df_goods/views.py">
+    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/register.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="68" column="38" selection-start-line="68" selection-start-column="38" selection-end-line="68" selection-end-column="38" />
-          <folding>
-            <element signature="e#24#69#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="57">
+          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_goods/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/venv/lib/python3.5/site-packages/django/http/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/static/daily_fresh/js/register.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+        <state relative-caret-position="95">
+          <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_cart/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.virtualenvs/venv/lib/python3.5/site-packages/django/http/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/static/daily_fresh/css/reset.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/static/daily_fresh/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4864">
+          <caret line="256" column="4" selection-start-line="256" selection-start-column="4" selection-end-line="256" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
-          <caret line="9" column="54" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/static/daily_fresh/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="199" column="22" selection-start-line="199" selection-start-column="22" selection-end-line="199" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
+        <state relative-caret-position="1852">
+          <caret line="118" selection-start-line="118" selection-end-line="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_goods/detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_goods/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="25" column="56" selection-start-line="25" selection-start-column="56" selection-end-line="25" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/base_footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_user/base_top.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_cart/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_cart/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/templates/df_cart/cart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="146" column="54" selection-start-line="146" selection-start-column="54" selection-end-line="146" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_cart/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="81" column="40" selection-start-line="81" selection-start-column="40" selection-end-line="81" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/daily_fresh/df_user/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-304">
+          <caret line="137" column="52" selection-start-line="137" selection-start-column="52" selection-end-line="137" selection-end-column="52" />
+          <folding>
+            <element signature="e#24#69#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

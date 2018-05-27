@@ -64,8 +64,8 @@ $(function(){
 		var len = $('#pwd').val().length;
 		if(len<8||len>20)
 		{
-			$('#pwd').next().html('密码最少8位，最长20位')
-			$('#pwd').next().show();
+			$('#pwd').next().html('密码最少8位，最长20位').show();
+			// $('#pwd').next().show();
 			error_password = true;
 		}
 		else
@@ -82,8 +82,8 @@ $(function(){
 
 		if(pass!=cpass)
 		{
-			$('#cpwd').next().html('两次输入的密码不一致')
-			$('#cpwd').next().show();
+			$('#cpwd').next().html('两次输入的密码不一致').show();
+			// $('#cpwd').next().show();
 			error_check_password = true;
 		}
 		else

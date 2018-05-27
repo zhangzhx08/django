@@ -9,15 +9,15 @@ from .models import *
 
 def index(request):
     categorys = Category.objects.filter(is_delete=False)
-    list_click = []
-    list_pk = []
+    list_by_click = []
+    list_by_pk = []
     # length = categorys.count()
     # for category in categorys:
     #     list.append(category.ctitle)
 
-    for index in range(0, 2):
-        list_click.insert(0, categorys[index].goodsinfo_set.order_by('-gclick')[0:4])
-        list_pk.insert(0, categorys[index].goodsinfo_set.order_by('-pk')[0:2])
+    for index in range(0, len(categorys)):
+        list_by_click.insert(0, categorys[index].goodsinfo_set.order_by('-gclick')[0:4])
+        list_by_pk.insert(0, categorys[index].goodsinfo_set.order_by('-pk')[0:2])
     # cate0 = categorys[0].goodsinfo_set.order_by('-gclick')
     # cate1 = categorys[1].goodsinfo_set.order_by('gclick')
     # cate2 = categorys[2].goodsinfo_set.order_by('gclick')
@@ -32,8 +32,8 @@ def index(request):
     # cate05 = categorys[5].goodsinfo_set.order_by('gclick')
     context = {'font_flag': 'goods',
                'categorys': categorys,
-               'list_click': list_click,
-               'list_pk': list_pk,
+               'list_by_click': list_by_click,
+               'list_by_pk': list_by_pk,
                # 'cate0': cate0[0:4],
                # 'cate1': cate1[0:4],
                # 'cate2': cate2[0:4],
@@ -55,15 +55,15 @@ def list(request, cid, type, index):
     categorys = Category.objects.filter(is_delete=False)
     # 获取当前分类的最新2个商品
     category = categorys.get(pk=int(cid))
-    cate00 = category.goodsinfo_set.order_by('-pk')[0:2]
+    cate00 = category.goodsinfo_set.filter(is_delete=False).order_by('-pk')[0:2]
     # 获取当前分类中所有商品按制定方式排序的查询集
     goods_list = []
     if type == 'default':
-        goods_list = category.goodsinfo_set.order_by('-gclick')
+        goods_list = category.goodsinfo_set.filter(is_delete=False).order_by('-gclick')
     elif type == 'price':
-        goods_list = category.goodsinfo_set.order_by('-gprice')
+        goods_list = category.goodsinfo_set.filter(is_delete=False).order_by('-gprice')
     else:
-        goods_list = category.goodsinfo_set.order_by('-gsales')
+        goods_list = category.goodsinfo_set.filter(is_delete=False).order_by('-gsales')
 
     # 分页
     paginator = Paginator(goods_list, 10)
@@ -106,7 +106,7 @@ def detail(request, gid):
 
     # 获取本分类中的两个新品
     category = goods.category
-    cate00 = category.goodsinfo_set.order_by('-pk')[0:2]
+    cate00 = category.goodsinfo_set.filter(is_delete=False).order_by('-pk')[0:2]
     # 构造Json数据
     context = {
         'font_flag': 'goods',

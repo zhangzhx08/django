@@ -14,6 +14,8 @@ class UserInfo(models.Model):
     class Meta:
         ordering = ['pk', 'uname']
 
+    def __str__(self):
+        return self.uname
 
 class SiteInfo(models.Model):
     '''收货地址类'''
@@ -26,3 +28,7 @@ class SiteInfo(models.Model):
 
     class Meta:
         ordering = ['pk', 'user']
+
+    def __str__(self):
+        return self.sperson+'/'+self.saddress+'/'+self.sperson
+

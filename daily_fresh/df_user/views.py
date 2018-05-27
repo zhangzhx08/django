@@ -53,6 +53,12 @@ def register_handle(request):
 
 # 登录
 def login(request):
+    # 打印request.META中的键值对内容
+    # meta = request.META
+    # for item in meta:
+    #     print(item, end='')
+    #     print('===', end='')
+    #     print(meta[item])
     uname = request.COOKIES.get('uname', '')
     context = {'uname': uname, 'error_name': 0, 'error_pwd': 0}
     return render(request, 'df_user/login.html', context)
@@ -76,9 +82,20 @@ def login_handle(request):
         upwd_sha = s.hexdigest()
         # 判断密码是否正确
         if upwd_sha == users[0].upwd:
-            # 获取发起请求的原页面地址,并重定向
-            url = request.COOKIES.get('request_url', reverse('df_goods:index'))
+            # 获取发起请求的原页面地址(未登录状态下点击添加购物车)，或者请求的目的页面地址
+            if 'HTTP_REFERER' in request.COOKIES:
+                url = request.COOKIES.get('HTTP_REFERER')
+            else:
+                url = request.COOKIES.get('request_url', reverse('df_goods:index'))
+
+            # 构造HttpRespo对象
             redi = redirect(url)
+
+            # 删除COOKIES['HTTP_REFERER']中保存的发起请求的原页面地址
+            redi.delete_cookie('HTTP_REFERER')
+            # 删除COOKIES['request_url']中保存的请求的目的页面地址
+            redi.delete_cookie('request_url')
+
             # 设置cookie，记住用户名
             if remember == '1':
                 redi.set_cookie('uname', uname)
@@ -87,7 +104,7 @@ def login_handle(request):
             # 设置session，状态保持
             request.session['user_id'] = users[0].id
             request.session['uname'] = uname
-            request.session.set_expiry(3600)
+            request.session.set_expiry(7200)
             return redi
         else:
             # 构造HttpResponseRedirect对象
@@ -121,6 +138,8 @@ def is_login(func):
             redi = redirect(reverse('df_user:login'))
             # 设置cookie保存原来的页面地址
             redi.set_cookie('request_url', request.get_full_path())
+            # meta = request.META
+            # redi.set_cookie('referer_url', meta)
             return redi
     return login_func
 
@@ -128,7 +147,9 @@ def is_login(func):
 # 退出登录
 def logout(request):
     request.session.flush()
-    return redirect(reverse('df_goods:index'))
+    resp = redirect(reverse('df_goods:index'))
+    resp.delete_cookie('count')
+    return resp
 
 
 # 用户中心——用户信息

@@ -1,7 +1,21 @@
 {% extends 'df_user/base_footer.html' %}
 
-{% block body%}
+{% block base_head %}
+    <script>
+        $(function () {
+            var url = '{% url 'df_cart:cart_count' %}';
+            $.get(url, function (data) {
+                $('#show_count').text(data.count);
+            });
+        })
+    </script>
 
+    {% block head %}
+
+    {% endblock %}
+{% endblock base_head %}
+
+{% block body%}
     <div class="header_con">
 		<div class="header">
 			<div class="welcome fl">欢迎来到天天生鲜!</div>
@@ -51,24 +65,19 @@
                 <input type="text" class="input_text fl" name="" placeholder="搜索商品">
                 <input type="button" class="input_btn fr" name="" value="搜索">
             </div>
-
         {% else %}
-
             <div class="search_con fl">
 			    <input type="text" class="input_text fl" name="" placeholder="搜索商品">
 			    <input type="button" class="input_btn fr" name="" value="搜索">
 		    </div>
             <div class="guest_cart fr">
                 <a href="{% url 'df_cart:cart' %}" class="cart_name fl">我的购物车</a>
-                <div class="goods_count fl" id="show_count">1</div>
+                <div class="goods_count fl" id="show_count"></div>
             </div>
         {% endif %}
     </div>
 
-
     {% block center %}
 
     {% endblock %}
-
-
 {% endblock body%}

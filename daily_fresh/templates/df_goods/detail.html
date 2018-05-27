@@ -7,19 +7,20 @@
 
 {% block head %}
 
-    <script type="text/javascript" src="/static/daily_fresh/js/jquery-1.12.4.min.js"></script>
     <script>
 
         $(function () {
 
+            {# 购买数量+1 #}
             function add() {
-                num = $('#num_show').val();
+                var num = $('#num_show').val();
                 num = parseInt(num)+1;
                 $('#num_show').val(num);
             }
 
+            {# 购买数量-1 #}
             function minus() {
-                num = $('#num_show').val();
+                var num = $('#num_show').val();
                 if(parseInt(num)>1){
                     num = parseInt(num)-1;
                 }
@@ -27,22 +28,42 @@
             }
 
             function calculate_gtotle(){
-                num = $('#num_show').val();
-                {#price = parseFloat($('#gprice').text())#}
-                price = {{ goods.gprice }};
-                totle = parseInt(num)*price;
+                var num = $('#num_show').val();
+                var totle = parseInt(num)*{{ goods.gprice }};
                 $('#gtotle').text(totle.toFixed(2)+'元');
             }
 
 
+            {# +按钮绑定click事件 #}
             $('#add').click(function () {
                 add();
                 calculate_gtotle();
             });
 
+            {# - 按钮绑定click事件 #}
             $('#minus').click(function () {
                 minus();
                 calculate_gtotle();
+            });
+
+            {# 加入购物车按钮绑定click事件 #}
+            $('#add_cart').click(function () {
+                var count = $('#num_show').val();
+
+                {# 在django标签中无法使用jquery变量，只能先用一个字符站位，然后使用replace()方法将占位符替换为jquery变量 #}
+                {#var url = "{% url 'df_cart:cart_add' goods.id 0 %}".replace('0',count);#}
+                var goods_id = {{ goods.id }};
+                url = '/df_cart/cart_add/'+goods_id+'/'+count+'/';
+
+                $.get(url, function (data) {
+                    if(data.is_login){
+                        $('#show_count').text(data.cart_count);
+                    }else{
+                        $(location).attr('href', '{% url 'df_user:login' %}');
+                        {#location.href = {% url 'df_user:login' %}#}
+                    }
+                });
+
             });
 
         })
@@ -82,10 +103,11 @@
 		</div>
 	</div>
 
+    {# 导航栏 #}
 	<div class="breadcrumb">
 		<a href="javascript:;">全部分类</a>
 		<span>></span>
-		<a href="{% url 'df_goods:list' category.pk 1 %}">{{ category.ctitle }}</a>
+		<a href="{% url 'df_goods:list' category.pk 'default' 1 %}">{{ category.ctitle }}</a>
 		<span>></span>
 		<a href="javascript:;">商品详情</a>
 	</div>
@@ -97,12 +119,16 @@
 
         {# 显示商品基本信息 #}
 		<div class="goods_detail_list fr">
+
+            {# 名称、简介、价格、单位 #}
 			<h3>{{ goods.gtitle }}</h3>
 			<p>{{ goods.gintro }}</p>
 			<div class="prize_bar">
 				<span class="show_pirze">¥<em>{{ goods.gprice }}</em></span>
 				<span class="show_unit">单  位：{{ goods.gunit }}</span>
 			</div>
+
+            {# 数量信息 #}
 			<div class="goods_num clearfix">
 				<div class="num_name fl">数 量：</div>
 				<div class="num_add fl">
@@ -111,9 +137,11 @@
 					<a href="javascript:;" class="minus fr" id="minus">-</a>
 				</div>
 			</div>
+
+            {# 总价信息、购买按钮、加入购物车按钮 #}
 			<div class="total">总价：<em id="gtotle">{{ goods.gprice }}元</em></div>
 			<div class="operate_btn">
-				<a href="javascript:;" class="buy_btn">立即购买</a>
+				<a href="javascript:;" class="buy_btn" id="buy_btn">立即购买</a>
 				<a href="javascript:;" class="add_cart" id="add_cart">加入购物车</a>
 			</div>
 		</div>
@@ -138,6 +166,7 @@
 			</div>
 		</div>
 
+        {# 商品介绍、评论 #}
 		<div class="r_wrap fr clearfix">
 			<ul class="detail_tab clearfix">
 				<li class="active">商品介绍</li>
@@ -154,6 +183,7 @@
 		</div>
 	</div>
 
+    {# 添加购物车动画的圆圈 #}
     <div class="add_jump"></div>
 
 {% endblock %}
@@ -163,23 +193,24 @@
 
     <script type="text/javascript" src="/static/daily_fresh/js/jquery-1.12.2.js"></script>
     <script type="text/javascript">
-        var $add_x = $('#add_cart').offset().top;
-        var $add_y = $('#add_cart').offset().left;
+        var $add_x = $('#add_cart').offset().left;
+        var $add_y = $('#add_cart').offset().top;
 
-        var $to_x = $('#show_count').offset().top;
-        var $to_y = $('#show_count').offset().left;
+        var $to_x = $('#show_count').offset().left;
+        var $to_y = $('#show_count').offset().top;
 
-        $(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
         $('#add_cart').click(function(){
-            $(".add_jump").stop().animate({
-                    'left': $to_y+7,
-                    'top': $to_x+7},
-                "fast", function() {
-                    $(".add_jump").fadeOut('fast',function(){
-                        $('#show_count').html(2);
-                    });
 
-                });
+            $(".add_jump").css({'left':$add_x+80,'top':$add_y+10,'display':'block'})
+
+            $(".add_jump").stop().animate({'left': $to_x+10, 'top': $to_y+9}, "fast", function() {
+
+                $(".add_jump").fadeOut('fast');
+
+                {#$(".add_jump").fadeOut('fast',function(){#}
+                {#    $('#show_count').html();#}
+               {# });#}
+            });
         })
     </script>
 

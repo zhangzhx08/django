@@ -6,23 +6,8 @@
 
 
 {% block head %}
-    <script type="text/javascript" src="/static/daily_fresh/js/jquery-1.12.4.min.js"></script>
     <script>
         $(function () {
-            {#function active(type){#}
-            {#    if(type === 'default'){#}
-            {#        $('.sort_bar a:first').addClass('active').sibling().removeClass('active');#}
-            {#    }#}
-            {#    if(type === 'price'){#}
-            {#        $('.sort_bar a:eq(2)').addClass('active').sibling().removeClass('active');#}
-            {#    }#}
-            {#    if(type === 'sales'){#}
-            {#        $('.sort_bar a:last').addClass('active').sibling().removeClass('active');#}
-            {#    }#}
-            {# } #}
-            {##}
-            {#active({{ type }});#}
-
             $('.sort_bar').click(function () {
                 $(this).addClass('active').sibling().removeClass('active');
             })
@@ -32,7 +17,6 @@
 
 
 {% block center %}
-
     <div class="navbar_con">
 		<div class="navbar clearfix">
 
@@ -69,7 +53,6 @@
 	</div>
 
 	<div class="main_wrap clearfix">
-
         {# 商品推荐 #}
 		<div class="l_wrap fl clearfix">
 			<div class="new_goods">
@@ -87,7 +70,6 @@
 		</div>
 
 		<div class="r_wrap fr clearfix">
-
 			{# 排序按钮 #}
             <div class="sort_bar">
 				<a href="{% url 'df_goods:list' category.pk 'default' 1 %}" {% if type == 'default' %}class="active"{% endif %}>默认</a>
@@ -108,7 +90,6 @@
                         </div>
                     </li>
                 {% endfor %}
-
 			</ul>
 
             {# 底部页码 #}
@@ -135,7 +116,6 @@
 			</div>
 		</div>
 	</div>
-
 {% endblock %}
 
 
