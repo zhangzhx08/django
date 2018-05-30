@@ -52,20 +52,20 @@
 			<ul class="points"></ul>
 		</div>
 		<div class="adv fl">
-			<a href="#"><img src="/static/daily_fresh/images/adv01.jpg"></a>
-			<a href="#"><img src="/static/daily_fresh/images/adv02.jpg"></a>
+			<a href="javascript:;"><img src="/static/daily_fresh/images/adv01.jpg"></a>
+			<a href="javascript:;"><img src="/static/daily_fresh/images/adv02.jpg"></a>
 		</div>
 	</div>
 
     {% for category in categorys %}
-
         <div class="list_model">
+            {# 首页每个分类的两个新品 #}
             <div class="list_title clearfix">
                 <h3 class="fl" id="model01">{{ category.ctitle }}</h3>
                 <div class="subtitle fl">
                     <span>|</span>
-                    {% for item in list_by_pk %}
-                        <a href="#">{{ item.gtitle }}</a>
+                    {% for goods in list_by_pk.pop %}
+                        <a href="#">{{ goods.gtitle }}</a>
                     {% endfor %}
                 </div>
                 <a href="{% url 'df_goods:list' category.pk 'default' 1 %}" class="goods_more fr" id="fruit_more">
@@ -73,22 +73,23 @@
                 </a>
             </div>
 
+            {# 首页每个分类的四个点击量靠前的商品 #}
             <div class="goods_con clearfix">
                 <div class="goods_banner fl"><img src="/static/media/{{ category.cpic }}"></div>
                 <ul class="goods_list fl">
-                    {% for item in list_by_click.pop %}
+                    {% for goods in list_by_click.pop %}
                         <li>
-                            <h4><a href="{% url 'df_goods:detail' item.pk %}">{{ item.gtitle }}</a></h4>
-                            <a href="{% url 'df_goods:detail' item.pk %}"><img src="/static/media/{{ item.gpic }}"></a>
-                            <div class="prize">¥ {{ item.gprice }}</div>
+                            <h4><a href="{% url 'df_goods:detail' goods.pk %}">{{ goods.gtitle }}</a></h4>
+                            <a href="{% url 'df_goods:detail' goods.pk %}">
+                                <img src="/static/media/{{ goods.gpic }}">
+                            </a>
+                            <div class="prize">¥ {{ goods.gprice }}</div>
                         </li>
                     {% endfor %}
-
                 </ul>
             </div>
         </div>
     {% endfor %}
-
 
 {% endblock center %}
 

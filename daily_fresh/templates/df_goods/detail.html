@@ -59,8 +59,8 @@
                     if(data.is_login){
                         $('#show_count').text(data.cart_count);
                     }else{
-                        $(location).attr('href', '{% url 'df_user:login' %}');
-                        {#location.href = {% url 'df_user:login' %}#}
+                        location.href = '{% url 'df_user:login' %}';
+                        {#$(location).attr('href', '{% url 'df_user:login' %}');#}
                     }
                 });
 

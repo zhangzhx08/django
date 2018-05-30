@@ -10,7 +10,8 @@ from df_user.views import is_login
 @is_login
 def cart(request):
     user_id  = request.session.get('user_id')
-    cart_list = CartInfo.objects.filter(user_id = user_id)
+    cart_list = CartInfo.objects.filter(user_id=user_id)
+    cart_list = cart_list[::-1]
     length = len(cart_list)
     context = {'font_flag': 'cart', 'cart_list': cart_list, 'length': length}
     return render(request, 'df_cart/cart.html', context)
@@ -44,7 +45,6 @@ def cart_add(request, gid, count):
         # 将获取的参数转化为int类型
         gid = int(gid)
         count = int(count)
-
         # 获取用户id，依据user_id查询用户购物车列表,并求得列表中元素的个数
         user_id = int(request.session.get('user_id'))
         cart_list = CartInfo.objects.filter(user_id=user_id)
@@ -62,23 +62,71 @@ def cart_add(request, gid, count):
         cart.goods_id = gid
         cart.count = count
         cart.save()
-        return JsonResponse({'is_login': True, 'cart_count': length+1})
+        resp = JsonResponse({'is_login': True, 'cart_count': length + 1})
+        # 设置COOKIES
+        resp.set_cookie('count', length+1)
+        return resp
 
 
 # 购物车商品编辑
-def cart_edit(request, gid, count):
+def cart_edit_count(request, gid, count):
     cart = CartInfo.objects.get(goods_id=int(gid))
     cart.count = int(count)
     cart.save()
-    return JsonResponse({'status': True})
+    return JsonResponse({'is_succeed': True})
+
+
+# 维护购物车商品是否被选中
+def cart_edit_status(request, gid, is_selected):
+    if gid == '00':
+        if is_selected == '1':
+            carts = CartInfo.objects.filter(is_selected=False)
+            for cart in carts:
+                cart.is_selected = True
+                cart.save()
+        else:
+            carts = CartInfo.objects.filter(is_selected=True)
+            for cart in carts:
+                cart.is_selected = False
+                cart.save()
+        return JsonResponse({'is_succeed': True})
+    else:
+        cart = CartInfo.objects.get(goods_id=int(gid))
+        if is_selected == '1':
+            cart.is_selected = True
+        else:
+            cart.is_selected = False
+        cart.save()
+        return JsonResponse({'is_succeed': True})
+
+# def cart_edit_status(request):
+#     if request.GET.get('check_all') == 'true':
+#         if request.GET.get('status') == 'true':
+#             cart_list = CartInfo.objects.filter(is_selected=False)
+#             for cart in cart_list:
+#                 cart.is_selected = True
+#                 cart.save()
+#         else:
+#             cart_list = CartInfo.objects.filter(is_selected=True)
+#             for cart in cart_list:
+#                 cart.is_selected = False
+#                 cart.save()
+#     else:
+#         cart = CartInfo.objects.get(goods_id=request.GET.get('goods_id'))
+#         if request.GET.get('status') == 'true':
+#             cart.is_selected = True
+#         else:
+#             cart.is_selected = False
+#         cart.save()
+#     return JsonResponse({})
 
 
 # 从购物车删除商品
 def cart_delete(request, gid):
     cart = CartInfo.objects.get(goods_id=int(gid))
     cart.delete()
-    count = request.COOKIES['count']
+    # count = request.COOKIES['count']
     resp = JsonResponse({'is_delete': True})
-    resp.set_cookie('count', int(count)-1)
+    # resp.set_cookie('count', int(count)-1)
     return resp
 

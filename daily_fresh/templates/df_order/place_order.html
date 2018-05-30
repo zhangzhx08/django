@@ -1,8 +1,74 @@
 {% extends 'df_user/base_top.html' %}
 
-
 {% block title %}
     天天生鲜-提交订单
+{% endblock title %}
+
+
+{% block head %}
+    <script>
+        $(function () {
+            !function () {
+                var subtotle = 0;
+                var totle = 0;
+                $('.subtotle').each(function () {
+                    var price = $(this).prev().prev().children().text();
+                    var count= $(this).prev().text();
+                    subtotle = parseFloat(price)*parseInt(count);
+                    $(this).text(subtotle.toFixed(2)+'元');
+                    totle += subtotle;
+                });
+                $('#totle_price').text(totle.toFixed(2)+'元');
+                $('#totle_pay').text(totle.toFixed(2)+'元');
+            }();
+
+            {# 提交订单 #}
+            $('#order_btn').click(function() {
+                {#localStorage.setItem('order_finish', 2);#}
+                var url = '{% url 'df_order:order_haddle' %}';
+                var arg = {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'address': $('#site').text(),
+                };
+
+                {# 发送POST请求 #}
+                $.post(
+                    url,
+                    arg,
+                    function (data) {
+                        if(data.is_succeed === true){
+                            $('.popup p').text('提交订单成功！');
+                            $('.popup_con').fadeIn('fast', function() {
+                                setTimeout(function(){
+                                    $('.popup_con').fadeOut('fast',function(){
+                                        window.location.href = '{% url 'df_user:user_center_order' 1 %}';
+                                    });
+                                },2000);
+                            });
+                        }else if(data.inventory === true){
+                            $('.popup p').text('抱歉，库存不足！');
+                            $('.popup_con').fadeIn('fast', function() {
+                                setTimeout(function(){
+                                    $('.popup_con').fadeOut('fast',function(){
+                                        window.location.href = '{% url 'df_cart:cart' %}';
+                                    });
+                                },2000);
+                            });
+                        }else if(data.except){
+                            $('.popup p').text('抱歉，发生异常！');
+                            $('.popup_con').fadeIn('fast', function() {
+                                setTimeout(function(){
+                                    $('.popup_con').fadeOut('fast');
+                                },2000);
+                            });
+                        }
+                    }
+                );
+            });
+        })
+    </script>
+    <script type="text/javascript">
+    </script>
 {% endblock %}
 
 
@@ -13,7 +79,7 @@
 	<div class="common_list_con clearfix">
 		<dl>
 			<dt>寄送到：</dt>
-			<dd><input type="radio" name="" checked="">北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
+			<dd><input type="radio" name="" checked=""><em id="site">{{ site }}</em></dd>
 		</dl>
 		<a href="user_center_site.html" class="edit_site">编辑收货地址</a>
 
@@ -43,33 +109,26 @@
 			<li class="col04">数量</li>
 			<li class="col05">小计</li>
 		</ul>
-		<ul class="goods_list_td clearfix">
-			<li class="col01">1</li>
-			<li class="col02"><img src="images/goods/goods012.jpg"></li>
-			<li class="col03">奇异果</li>
-			<li class="col04">500g</li>
-			<li class="col05">25.80元</li>
-			<li class="col06">1</li>
-			<li class="col07">25.80元</li>
-		</ul>
-		<ul class="goods_list_td clearfix">
-			<li class="col01">2</li>
-			<li class="col02"><img src="images/goods/goods003.jpg"></li>
-			<li class="col03">大兴大棚草莓</li>
-			<li class="col04">500g</li>
-			<li class="col05">16.80元</li>
-			<li class="col06">1</li>
-			<li class="col07">16.80元</li>
-		</ul>
+        {% for cart in cart_list %}
+            <ul class="goods_list_td clearfix" id="{{ cart.goods.pk }}">
+                <li class="col01">{{ index_list.pop }}</li>
+                <li class="col02"><img src="/static/media/{{ cart.goods.gpic }}"></li>
+                <li class="col03">{{ cart.goods.gtitle }}</li>
+                <li class="col04">{{ cart.goods.gunit }}</li>
+                <li class="col05"><em>{{ cart.goods.gprice }}</em>元</li>
+                <li class="col06">{{ cart.count }}</li>
+                <li class="col07 subtotle"></li>
+            </ul>
+        {% endfor %}
 	</div>
 
 	<h3 class="common_title">总金额结算</h3>
 
 	<div class="common_list_con clearfix">
 		<div class="settle_con">
-			<div class="total_goods_count">共<em>2</em>件商品，总金额<b>42.60元</b></div>
-			<div class="transit">运费：<b>10元</b></div>
-			<div class="total_pay">实付款：<b>52.60元</b></div>
+			<div class="total_goods_count">共<em>{{ length }}</em>件商品，总金额<b id="totle_price"></b></div>
+			<div class="transit">运费：<b>0元</b></div>
+			<div class="total_pay">实付款：<b id="totle_pay"></b></div>
 		</div>
 	</div>
 
@@ -84,27 +143,5 @@
 
 		<div class="mask"></div>
 	</div>
-
-{% endblock %}
-
-
-{% block script %}
-
-    <script type="text/javascript" src="/static/daily_fresh/js/jquery-1.12.2.js"></script>
-	<script type="text/javascript">
-		$('#order_btn').click(function() {
-			localStorage.setItem('order_finish',2);
-
-			$('.popup_con').fadeIn('fast', function() {
-
-				setTimeout(function(){
-					$('.popup_con').fadeOut('fast',function(){
-						window.location.href = 'index.html';
-					});
-				},3000)
-
-			});
-		});
-	</script>
 
 {% endblock %}

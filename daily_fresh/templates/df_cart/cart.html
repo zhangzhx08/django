@@ -6,21 +6,19 @@
 
 
 {% block head %}
-    <script type="text/javascript" src="/static/daily_fresh/js/jquery-1.12.4.min.js"></script>
     <script>
         $(function () {
-
             {# 点击加号，数量加1 #}
             function add(elem){
-                var count = elem.next().val();
-                elem.next().val(parseInt(count)+1);
+                var count = elem.prev().val();
+                elem.prev().val(parseInt(count)+1);
             }
 
             {# 点击减号，数量减1 #}
             function minus(elem){
-                var count = elem.prev().val();
+                var count = elem.next().val();
                 if(parseInt(count)>1){
-                    elem.prev().val(parseInt(count)-1);
+                    elem.next().val(parseInt(count)-1);
                 }
             }
 
@@ -31,13 +29,10 @@
                 var totle = 0;
                 {# 计算小计、总结 #}
                 $('.col07').each(function () {
-                    {# 获取该商品价格 #}
+                    {# 获取该商品价格、数量，计算小计并填充 #}
                     var price = $(this).siblings('.col05').children('em').text();
-                    {# 获取该商品数量 #}
                     var count = $(this).prev().children().children('input').val();
-                    {# 计算小计 #}
                     subtotle = parseFloat(price)*parseInt(count);
-                    {# 填充小计 #}
                     $(this).text(subtotle.toFixed(2)+'元');
                     {# 计算总价 #}
                     if($(this).siblings('.col01').children('input').prop('checked')){
@@ -48,17 +43,69 @@
                 $('#totle').text(totle.toFixed(2));
             }
 
-            {# 更新数据库 #}
-            function update_sql(elem){
+            {# 更新数据库中购物车里某种商品的数量 #}
+            function update_sql_count(elem){
                 var goods_id = elem.parents('.cart_list_td').attr('id');
                 var count = elem.val();
                 {# 踩坑：使用标签反向解析，会设计replace替换，有一个参数时没有问题 #}
-                {# 但是有两个数字参数时，会发生前一个数字替换后的内容，再被第二个数字替换时会被误替换 #}
-                {# 所以还是建议使用原始url，避免此类发生误替换 #}
+                {# 但是有两个数字参数时，会发生前一个数字替换后的内容，再被第二个数字替换时被误替换,所以建议使用原始url #}
                 {#url = '{% url 'df_cart:cart_edit' 1 2 %}'.replace('1', goods_id).replace('1', count)#}
-                var url = '/df_cart/cart_edit/'+goods_id+'/'+count+'/';
+                var url = '/df_cart/cart_edit_count/'+goods_id+'/'+count+'/';
                 $.get(url);
             }
+
+            {# 更新数据库购物车中商品是否被勾选,并更新页面数量#}
+            function update_sql_status(elem){
+                {# 构造ajax的url #}
+                if(elem.attr('id')==='check_all'){
+                    if(elem.prop('checked')){
+                        var url = '/df_cart/cart_edit_status/00/1';
+                    }else{
+                        var url = '/df_cart/cart_edit_status/00/0';
+                    }
+                }else{
+                    var goods_id = elem.parents('.cart_list_td').attr('id');
+                    if(elem.prop('checked')){
+                        var is_selected = '1';
+                    }else{
+                        var is_selected = '0';
+                    }
+                    var url = '/df_cart/cart_edit_status/'+goods_id+'/'+is_selected+'/';
+                }
+                $.get(url, function (data) {
+                    if(data.is_succeed){
+                        {# 重新计算选择的商品数量、总价 #}
+                        calculate_selected_count();
+                        calculate_totle();
+                    }
+                });
+            }
+            {% comment %}
+            {# 更新数据库中购物车里某种商品是否被选中,##使用get请求## #}
+            function update_sql_status(elem){
+                var url = '{% url 'df_cart:cart_edit_status' %}';
+                if(elem.attr('id')==='check_all'){
+                    if(elem.prop('checked')){
+                        var data = {'check_all': true, 'status': true}
+                    }else{
+                        var data = {'check_all': true, 'status': false}
+                    }
+                    {#$.get(url, data);#}
+
+                }else{
+                    var goods_id = elem.parents('.cart_list_td').attr('id');
+                    if(elem.prop('checked')){
+                        var data = {'check_all': false, 'goods_id': goods_id, 'status': true}
+                    }else{
+                        var data = {'check_all': false, 'goods_id': goods_id, 'status': false}
+                    }
+                    {#$.get(url, data);#}
+                }
+                $.get(url, data, function (data) {
+
+                });
+            }
+            {% endcomment %}
 
             {# 检验用户输入是否是大于0的数字,若不是，默认为1 #}
             function check_count(elem){
@@ -68,27 +115,59 @@
                 }
             }
 
-            {# 维护购物车商品总数 #}
+            {# 删除购物车商品时维护商品总数 #}
             function calculate_totle_count(){
                 {# 踩坑啦：$('.class').text()的结果是全部匹配元素字符内容加和成的新字符串 #}
-                var length = parseInt($('.totle_goods_count').text())-1;
-                $('.totle_goods_count').text(length);
+                {#var count = $.cookie('count', {path: '/'});#}
+                var count = $.cookie('count');
+                count = parseInt(count)-1;
+                $.cookie('count', count, {path: '/'});
+                $('.totle_goods_count').text(count);
             }
 
-            {# 维护购物车被选中的商品数量 #}
+            {# 维护购物车被勾选的商品数量 #}
             function calculate_selected_count(){
                 var selected_count = $(':checked:not(#check_all)').length;
                 $('#selected_goods_count').text(selected_count);
             }
 
+            {# 删除商品 #}
+            function delete_goods(elem){
+                elem.remove();
+                {# 重新计算选择的商品数量、总价 #}
+                calculate_totle_count();
+                calculate_selected_count();
+                calculate_totle();
+            }
+
+            {# 加载页面时自动调用该匿名函数，判断商品是否都被勾选，以设置全选按钮状态 #}
+            !function () {
+                if($(':checkbox').length > 1 && $(':checked').length+1 === $(':checkbox').length){
+                    $('#check_all').prop('checked', true);
+                }
+            }();
+
+            {# 维护结算按钮是否有效 #}
+            function to_pay(){
+                if($(':checked').length>0){
+                    $('#to_pay').attr('href', '{% url 'df_order:place_order' %}');
+                    $('#to_pay').css('background-color', '#ff3d3d');
+                }else{
+                    $('#to_pay').attr('href', 'javascript:;');
+                    $('#to_pay').css({'background-color': '#888'});
+                }
+            }
+
             calculate_totle();
+            calculate_selected_count();
+            to_pay();
 
             {# 加号按钮绑定click事件 #}
             $('.add').click(function () {
-                {# 调用方法#}
+                {# 调用方法 #}
                 add($(this));
                 {# 模拟输入框失去焦点，触发相应事件 #}
-                $(this).next().blur();
+                $(this).prev().blur();
             });
 
             {# 减号按钮绑定click事件 #}
@@ -96,7 +175,7 @@
                 {# 调用minus方法 #}
                 minus($(this));
                 {# 模拟输入框失去焦点，触发相应事件 #}
-                $(this).prev().blur();
+                $(this).next().blur();
             });
 
             {# input框绑定失去焦点事件 #}
@@ -104,22 +183,24 @@
                 {# 检验输入内容是否为大于0的数字 #}
                 check_count($(this));
                 {# 更新数据库#}
-                update_sql($(this));
+                update_sql_count($(this));
                 {# 调用函数 #}
                 calculate_totle();
-
             });
 
             {# 全选、全取消功能 #}
             $('#check_all').click(function () {
+                {# 设置商品按钮的状态 #}
                 var status = $(this).prop('checked');
                 $(':checkbox:not(#check_all)').prop('checked', status);
-                calculate_totle();
-                calculate_selected_count();
+                {# 维护商品被选状态,更新商品数量、总价 #}
+                update_sql_status($(this));
+                to_pay();
             });
 
-            {# 选择后重新计算总价 #}
+            {# 选择,重新计算选择商品数量、总价 #}
             $(':checkbox:not(#check_all)').click(function () {
+                {# 设置全选按钮的状态 #}
                 if($(this).prop('checked')){
                     if($(':checked').length+1 === $(':checkbox').length){
                         $('#check_all').prop('checked', true);
@@ -127,8 +208,9 @@
                 }else{
                     $('#check_all').prop('checked', false);
                 }
-                calculate_totle();
-                calculate_selected_count();
+                {# 维护商品被选状态 #}
+                update_sql_status($(this));
+                to_pay();
             });
 
             {# 删除购物车商品 #}
@@ -138,17 +220,14 @@
                 {# 发送jquery请求，并执行回调函数 #}
                 $.get(url, function (data) {
                     if(data.is_delete){
-                        {# 需要删除的商品div向上收起后，执行回调函数，删除并重新计算总价 #}
-                        $('#'+goods_id).slideUp(function () {
+                        {# 需要删除的商品div向上收起后，执行回调函数 #}
+                        $('#'+goods_id).slideUp(function(){
                             {# 在回调函数内，$(this)就指回调函数执行者 #}
-                            $(this).remove();
-                            calculate_totle();
-                            calculate_totle_count();
-                            calculate_selected_count();
+                            delete_goods($(this));
                         });
                     }
                 });
-            })
+            });
         });
 
     </script>
@@ -172,16 +251,23 @@
 
         {# 购物车商品列表 #}
         <ul class="cart_list_td clearfix" id="{{ cart.goods_id }}">
-            <li class="col01"><input type="checkbox"></li>
-            <li class="col02"><img src="/static/media/{{ cart.goods.gpic }}"></li>
-            <li class="col03">{{ cart.goods.gtitle }}<br><em>{{ cart.goods.gprice }}</em>元/{{ cart.goods.gunit }}</li>
+            <li class="col01"><input type="checkbox" {% if cart.is_selected %} checked {% endif %}></li>
+            <li class="col02">
+                <a href="{% url 'df_goods:detail' cart.goods_id %}">
+                    <img src="/static/media/{{ cart.goods.gpic }}">
+                </a>
+            </li>
+            <li class="col03">
+                <a href="{% url 'df_goods:detail' cart.goods_id %}">{{ cart.goods.gtitle }}</a><br>
+                <em>{{ cart.goods.gprice }}</em>元/{{ cart.goods.gunit }}
+            </li>
             <li class="col04">{{ cart.goods.gunit }}</li>
             <li class="col05"><em>{{ cart.goods.gprice }}</em>元</li>
             <li class="col06">
                 <div class="num_add">
-                    <a href="javascript:;" class="add fl">+</a>
-                    <input type="text" class="num_show fl" value="{{ cart.count }}">
                     <a href="javascript:;" class="minus fl">-</a>
+                    <input type="text" class="num_show fl" value="{{ cart.count }}">
+                    <a href="javascript:;" class="add fl">+</a>
                 </div>
             </li>
             <li class="col07 subtotle"> </li>
@@ -197,7 +283,7 @@
             共计<b id="selected_goods_count">0</b>件商品
         </li>
 		<li class="col04">
-            <a href="{% url 'df_order:place_order' %}">去结算</a>
+            <a href="{% url 'df_order:place_order' %}" id="to_pay">去结算</a>
         </li>
 	</ul>
 

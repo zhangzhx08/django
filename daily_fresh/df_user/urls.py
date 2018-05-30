@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^login_haddle/$', views.login_handle, name='login_haddle'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^user_center_info/$', views.user_center_info, name='user_center_info'),
-    url(r'^user_center_order/$', views.user_center_order, name='user_center_order'),
+    url(r'^user_center_order/(\d+)/$', views.user_center_order, name='user_center_order'),
     url(r'^user_center_site/$', views.user_center_site, name='user_center_site'),
     url(r'^site_haddle/$', views.site_haddle, name='site_haddle')
 

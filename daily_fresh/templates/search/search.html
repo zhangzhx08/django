@@ -1,0 +1,96 @@
+{% extends 'df_user/base_top.html' %}
+
+{% block title %}
+    天天生鲜-商品列表
+{% endblock %}
+
+
+{% block head %}
+    <script>
+        $(function () {
+            $('.sort_bar').click(function () {
+                $(this).addClass('active').siblings().removeClass('active');
+            })
+        })
+    </script>
+{% endblock %}
+
+
+{% block center %}
+    <div class="navbar_con">
+		<div class="navbar clearfix">
+
+            {# 商品分类 #}
+			<div class="subnav_con fl">
+				<h1>全部商品分类</h1>
+				<span></span>
+				<ul class="subnav">
+                    {% for item in categorys %}
+                        <li>
+                            <a href="{% url 'df_goods:list' item.pk 'default' 1 %}" class="{{ item.cclass }}">
+                                {{ item.ctitle }}
+                            </a>
+                        </li>
+                    {% endfor %}
+				</ul>
+			</div>
+
+            <ul class="navlist fl">
+				<li><a href="{% url 'df_goods:index' %}">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+
+    {# 页面导航 #}
+	<div class="breadcrumb">
+		<a href="javascript:;">全部分类</a>
+		<span>></span>
+		<a href="javascript:;">搜索</a>
+	</div>
+
+	<div class="main_wrap clearfix">
+		<div class="r_wrap fr clearfix">
+            {# 商品列表 #}
+			<ul class="goods_type_list clearfix">
+                {% for goods in page %}
+                    <li>
+                        <a href="{% url 'df_goods:detail' goods.object.pk %}"><img src="/static/media/{{ goods.object.gpic }}"></a>
+                        <h4><a href="{% url 'df_goods:detail' goods.object.pk %}">{{ goods.object.gtitle }}</a></h4>
+                        <div class="operate">
+                            <span class="prize">￥{{ goods.object.gprice }}</span>
+                            <span class="unit">{{ goods.object.gprice }}/{{ goods.object.gunit }}</span>
+                            <a href="#" class="add_goods" title="加入购物车"></a>
+                        </div>
+                    </li>
+                {% endfor %}
+			</ul>
+
+            {# 底部页码 #}
+			<div class="pagenation">
+                {% if page.has_previous %}
+                    <a href="/search/?q={{ query }}&amp;page={{ page.previous_page_number }}">< 上一页</a>
+                {% else %}
+                    <a href="javascript:;">< 上一页</a>
+                {% endif %}
+
+                {% for index in paginator.page_range %}
+                    {% if page.number == index %}
+                        <a href="javascript:;" class="active">{{ index }}</a>
+                    {% else %}
+                        <a href="/search/?q={{ query }}&amp;page={{ index }}">{{ index }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page.has_next %}
+                    <a href="/search/?q={{ query }}&amp;page={{ page.next_page_number }}">下一页 ></a>
+                {% else %}
+                    <a href="javascript:;">下一页 ></a>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

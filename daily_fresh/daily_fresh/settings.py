@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'df_cart',
     'df_order',
     'tinymce',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -163,3 +164,15 @@ TINYMCE_DEFAULT_CONFIG = {
     'width': 600,
     'height': 300,
 }
+
+# 添加搜索引擎
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+# 自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# HAYSTACK_SEARCH_RESULTS_PER_PAGE = 1

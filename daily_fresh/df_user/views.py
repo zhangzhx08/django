@@ -2,10 +2,12 @@
 
 from django.shortcuts import render, redirect
 from .models import *
+from df_order.models import *
 from df_goods.models import *
 from django.http import request, HttpResponse, JsonResponse, response
 from django.core.urlresolvers import reverse
 from hashlib import sha1
+from django.core.paginator import Paginator
 
 
 # 用户注册
@@ -110,7 +112,10 @@ def login_handle(request):
             # 构造HttpResponseRedirect对象
             redi = redirect(reverse('df_user:login'))
             # 设置cookie，记住用户名
-            redi.set_cookie('uname', uname)
+            if remember == '1':
+                redi.set_cookie('uname', uname)
+            else:
+                redi.set_cookie('uname', '', max_age=-1)
             redi.set_cookie('error_name', 0)
             redi.set_cookie('error_pwd', 1)
             return redi
@@ -121,7 +126,7 @@ def login_handle(request):
         if remember == '1':
             redi.set_cookie('uname', uname)
         else:
-            redi.set_cookie('uname', '')
+            redi.set_cookie('uname', '', max_age=-1)
         redi.set_cookie('error_name', 1)
         redi.set_cookie('error_pwd', 0)
         return redi
@@ -162,12 +167,12 @@ def user_center_info(request):
     uphone = user.uphone
     uaddress = user.uaddress
     # 获取最近浏览商品id列表
-    goods_id_list_str = request.COOKIES.get('goods_id_list')
-    goods_id_list = []
+    browsed_goods_id_list_str = request.COOKIES.get('browsed_goods_id_list')
+    browsed_goods_id_list = []
     goods_list = []
-    if goods_id_list_str:
-        goods_id_list = goods_id_list_str.split(',')
-    for id in goods_id_list:
+    if browsed_goods_id_list_str:
+        browsed_goods_id_list = browsed_goods_id_list_str.split(',')
+    for id in browsed_goods_id_list:
         goods_list.append(GoodsInfo.objects.get(pk=id))
     # 构造Json数据
     context = {
@@ -183,8 +188,12 @@ def user_center_info(request):
 
 # 用户中心——用户订单
 @is_login
-def user_center_order(request):
-    context = {'font_flag': 'user_center'}
+def user_center_order(request, index):
+    order_list = OrderInfo.objects.filter(is_pay=False)
+    order_list = order_list[::-1]
+    paginator = Paginator(order_list, 8)
+    page = paginator.page(int(index))
+    context = {'font_flag': 'user_center', 'order_list': order_list, 'page': page}
     return render(request, 'df_user/user_center_order.html', context)
 
 
