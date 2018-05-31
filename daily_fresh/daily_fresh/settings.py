@@ -24,6 +24,7 @@ SECRET_KEY = 'pklp+d)csr9+3eo7b+53zymwaehvp2nwbw&rioho26fc)h#%a4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -129,15 +130,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/var/www/daily_fresh/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static/')
 ]
 
 # 开发阶段的上传目录
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media/')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media/')
 # 部署后的上传文件目录
-# MEDIA_ROOT = '/var/www/daily_fresh/static/'
+MEDIA_ROOT = '/var/www/daily_fresh/static/media/'
 
 # MEDIA_URL与MEDIA_ROOT必须保持一直，这样在后台上传的图片才能被准确的找到
 MEDIA_URL = '/static/media/'

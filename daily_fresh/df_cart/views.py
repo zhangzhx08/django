@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.http import request, HttpResponse, JsonResponse
+from django.db.models import aggregates
 
 from .models import *
 from df_user.views import is_login
@@ -9,7 +10,7 @@ from df_user.views import is_login
 # 购物车
 @is_login
 def cart(request):
-    user_id  = request.session.get('user_id')
+    user_id = int(request.session.get('user_id'))
     cart_list = CartInfo.objects.filter(user_id=user_id)
     cart_list = cart_list[::-1]
     length = len(cart_list)
@@ -70,7 +71,8 @@ def cart_add(request, gid, count):
 
 # 购物车商品编辑
 def cart_edit_count(request, gid, count):
-    cart = CartInfo.objects.get(goods_id=int(gid))
+    user_id = int(request.session['user_id'])
+    cart = CartInfo.objects.get(user_id=user_id, goods_id=int(gid))
     cart.count = int(count)
     cart.save()
     return JsonResponse({'is_succeed': True})
@@ -78,20 +80,21 @@ def cart_edit_count(request, gid, count):
 
 # 维护购物车商品是否被选中
 def cart_edit_status(request, gid, is_selected):
+    user_id = int(request.session['user_id'])
     if gid == '00':
         if is_selected == '1':
-            carts = CartInfo.objects.filter(is_selected=False)
+            carts = CartInfo.objects.filter(user_id=user_id, is_selected=False)
             for cart in carts:
                 cart.is_selected = True
                 cart.save()
         else:
-            carts = CartInfo.objects.filter(is_selected=True)
+            carts = CartInfo.objects.filter(user_id=user_id, is_selected=True)
             for cart in carts:
                 cart.is_selected = False
                 cart.save()
         return JsonResponse({'is_succeed': True})
     else:
-        cart = CartInfo.objects.get(goods_id=int(gid))
+        cart = CartInfo.objects.get(user_id=user_id, goods_id=int(gid))
         if is_selected == '1':
             cart.is_selected = True
         else:
@@ -123,7 +126,8 @@ def cart_edit_status(request, gid, is_selected):
 
 # 从购物车删除商品
 def cart_delete(request, gid):
-    cart = CartInfo.objects.get(goods_id=int(gid))
+    user_id = int(request.session['user_id'])
+    cart = CartInfo.objects.get(user_id=user_id, goods_id=int(gid))
     cart.delete()
     # count = request.COOKIES['count']
     resp = JsonResponse({'is_delete': True})

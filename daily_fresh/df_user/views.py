@@ -189,7 +189,8 @@ def user_center_info(request):
 # 用户中心——用户订单
 @is_login
 def user_center_order(request, index):
-    order_list = OrderInfo.objects.filter(is_pay=False)
+    user_id = request.session['user_id']
+    order_list = OrderInfo.objects.filter(user_id=user_id, is_pay=False)
     order_list = order_list[::-1]
     paginator = Paginator(order_list, 8)
     page = paginator.page(int(index))
