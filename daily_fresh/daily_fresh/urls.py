@@ -25,5 +25,6 @@ urlpatterns = [
     url(r'^df_order/', include('df_order.urls', namespace='df_order')),
     url(r'^tinymce/', include('tinymce.urls', namespace='tinymce')),
     url('^search/', include('haystack.urls', namespace='haystack')),
+    url(r'df_celery/', include('df_celery.urls', namespace='df_celery')),
 
 ]

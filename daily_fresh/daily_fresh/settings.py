@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'df_order',
     'tinymce',
     'haystack',
+    'df_celery',
 ]
 
 
