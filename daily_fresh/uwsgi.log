@@ -3092,3 +3092,141 @@ spawned uWSGI worker 4 (pid: 42507, cores: 2)
 [pid: 42502|app: 0|req: 12/53] 192.168.18.2 () {44 vars in 925 bytes} [Thu May 31 22:48:22 2018] GET /df_cart/cart_count/ => generated 14 bytes in 1 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
 [pid: 42503|app: 0|req: 4/54] 192.168.18.2 () {46 vars in 1015 bytes} [Thu May 31 22:48:22 2018] GET /df_cart/cart/ => generated 13361 bytes in 20 msecs (HTTP/1.1 200) 4 headers in 125 bytes (1 switches on core 1)
 [pid: 42504|app: 0|req: 22/55] 192.168.18.2 () {44 vars in 925 bytes} [Thu May 31 22:48:22 2018] GET /df_cart/cart_count/ => generated 14 bytes in 2 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 31 22:53:12 2018] ***
+compiled with version: 5.4.0 20160609 on 18 May 2018 05:38:27
+os: Linux-4.4.0-127-generic #153-Ubuntu SMP Sat May 19 10:58:46 UTC 2018
+nodename: ubuntu
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /home/python/Desktop/django/daily_fresh
+writing pidfile to uwsgi.pid
+detected binary path: /home/python/.virtualenvs/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/python/Desktop/django/daily_fresh/
+your processes number limit is 11801
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 192.168.18.8:8000 fd 3
+Python version: 3.5.2 (default, Nov 23 2017, 16:37:01)  [GCC 5.4.0 20160609]
+Python main interpreter initialized at 0x1c29540
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+added [ to pythonpath.
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x1c29540 pid: 43163 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 43163)
+spawned uWSGI worker 1 (pid: 43165, cores: 2)
+spawned uWSGI worker 2 (pid: 43167, cores: 2)
+spawned uWSGI worker 3 (pid: 43168, cores: 2)
+spawned uWSGI worker 4 (pid: 43170, cores: 2)
+[pid: 43170|app: 0|req: 1/1] 192.168.18.2 () {46 vars in 1015 bytes} [Thu May 31 22:53:19 2018] GET /df_cart/cart/ => generated 13361 bytes in 198 msecs (HTTP/1.1 200) 4 headers in 125 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 2/2] 192.168.18.2 () {44 vars in 925 bytes} [Thu May 31 22:53:19 2018] GET /df_cart/cart_count/ => generated 14 bytes in 2 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43170|app: 0|req: 3/3] 192.168.18.2 () {46 vars in 1015 bytes} [Thu May 31 22:53:19 2018] GET /df_cart/cart/ => generated 13361 bytes in 28 msecs (HTTP/1.1 200) 4 headers in 125 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 4/4] 192.168.18.2 () {44 vars in 925 bytes} [Thu May 31 22:53:19 2018] GET /df_cart/cart_count/ => generated 14 bytes in 2 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43165|app: 0|req: 1/5] 192.168.18.2 () {46 vars in 1015 bytes} [Thu May 31 22:53:20 2018] GET /df_cart/cart/ => generated 13361 bytes in 208 msecs (HTTP/1.1 200) 4 headers in 125 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 5/6] 192.168.18.2 () {44 vars in 925 bytes} [Thu May 31 22:53:20 2018] GET /df_cart/cart_count/ => generated 14 bytes in 1 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43167|app: 0|req: 1/7] 192.168.18.2 () {46 vars in 1015 bytes} [Thu May 31 22:53:20 2018] GET /df_cart/cart/ => generated 13361 bytes in 232 msecs (HTTP/1.1 200) 4 headers in 125 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 6/8] 192.168.18.2 () {44 vars in 925 bytes} [Thu May 31 22:53:20 2018] GET /df_cart/cart_count/ => generated 14 bytes in 2 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43167|app: 0|req: 2/9] 192.168.18.2 () {44 vars in 933 bytes} [Thu May 31 22:53:22 2018] GET /df_cart/cart_delete/12/ => generated 19 bytes in 81 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43168|app: 0|req: 1/10] 192.168.18.2 () {44 vars in 933 bytes} [Thu May 31 22:53:31 2018] GET /df_cart/cart_delete/16/ => generated 19 bytes in 142 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43165|app: 0|req: 2/11] 192.168.18.2 () {44 vars in 947 bytes} [Thu May 31 22:53:33 2018] GET /df_cart/cart_edit_status/14/0/ => generated 20 bytes in 19 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43170|app: 0|req: 7/12] 192.168.18.2 () {44 vars in 947 bytes} [Thu May 31 22:53:34 2018] GET /df_cart/cart_edit_status/14/1/ => generated 20 bytes in 16 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 8/13] 192.168.18.2 () {44 vars in 947 bytes} [Thu May 31 22:53:35 2018] GET /df_cart/cart_edit_status/14/0/ => generated 20 bytes in 15 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43165|app: 0|req: 3/14] 192.168.18.2 () {44 vars in 947 bytes} [Thu May 31 22:53:35 2018] GET /df_cart/cart_edit_status/14/1/ => generated 20 bytes in 36 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 9/15] 192.168.18.2 () {44 vars in 947 bytes} [Thu May 31 22:53:36 2018] GET /df_cart/cart_edit_status/00/0/ => generated 20 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 10/16] 192.168.18.2 () {44 vars in 947 bytes} [Thu May 31 22:53:37 2018] GET /df_cart/cart_edit_status/00/1/ => generated 20 bytes in 9 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43168|app: 0|req: 2/17] 192.168.18.8 () {46 vars in 892 bytes} [Thu May 31 22:53:44 2018] GET /df_cart/cart/ => generated 0 bytes in 24 msecs (HTTP/1.1 302) 6 headers in 202 bytes (1 switches on core 1)
+[pid: 43165|app: 0|req: 4/18] 192.168.18.8 () {46 vars in 924 bytes} [Thu May 31 22:53:44 2018] GET /df_user/login/ => generated 3521 bytes in 6 msecs (HTTP/1.1 200) 5 headers in 278 bytes (1 switches on core 1)
+[pid: 43167|app: 0|req: 3/19] 192.168.18.8 () {52 vars in 1097 bytes} [Thu May 31 22:53:47 2018] POST /df_user/login_haddle/ => generated 0 bytes in 8 msecs (HTTP/1.1 302) 9 headers in 487 bytes (1 switches on core 0)
+[pid: 43165|app: 0|req: 5/20] 192.168.18.8 () {46 vars in 944 bytes} [Thu May 31 22:53:47 2018] GET /df_cart/cart/ => generated 11341 bytes in 28 msecs (HTTP/1.1 200) 4 headers in 125 bytes (1 switches on core 0)
+[pid: 43165|app: 0|req: 6/21] 192.168.18.8 () {44 vars in 846 bytes} [Thu May 31 22:53:47 2018] GET /df_cart/cart_count/ => generated 14 bytes in 1 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43165|app: 0|req: 7/22] 192.168.18.8 () {44 vars in 868 bytes} [Thu May 31 22:53:50 2018] GET /df_cart/cart_edit_status/14/0/ => generated 20 bytes in 15 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 11/23] 192.168.18.8 () {44 vars in 868 bytes} [Thu May 31 22:53:50 2018] GET /df_cart/cart_edit_status/14/1/ => generated 20 bytes in 11 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43165|app: 0|req: 8/24] 192.168.18.8 () {44 vars in 898 bytes} [Thu May 31 22:53:52 2018] GET /index/ => generated 9579 bytes in 49 msecs (HTTP/1.1 200) 4 headers in 124 bytes (1 switches on core 1)
+[pid: 43165|app: 0|req: 9/25] 192.168.18.8 () {44 vars in 839 bytes} [Thu May 31 22:53:53 2018] GET /df_cart/cart_count/ => generated 14 bytes in 35 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 1.171 seconds.
+Prefix dict has been built succesfully.
+[pid: 43167|app: 0|req: 4/26] 192.168.18.8 () {44 vars in 899 bytes} [Thu May 31 22:53:55 2018] GET /detail/16/ => generated 8236 bytes in 1236 msecs (HTTP/1.1 200) 5 headers in 179 bytes (1 switches on core 1)
+[pid: 43167|app: 0|req: 5/27] 192.168.18.8 () {44 vars in 843 bytes} [Thu May 31 22:53:56 2018] GET /df_cart/cart_count/ => generated 14 bytes in 1 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43168|app: 0|req: 3/28] 192.168.18.8 () {44 vars in 849 bytes} [Thu May 31 22:53:58 2018] GET /df_cart/cart_add/16/1/ => generated 35 bytes in 31 msecs (HTTP/1.1 200) 5 headers in 144 bytes (1 switches on core 0)
+[pid: 43168|app: 0|req: 4/29] 192.168.18.8 () {44 vars in 917 bytes} [Thu May 31 22:54:03 2018] GET /list/1/default/1/ => generated 11584 bytes in 88 msecs (HTTP/1.1 200) 4 headers in 125 bytes (1 switches on core 1)
+[pid: 43170|app: 0|req: 12/30] 192.168.18.8 () {44 vars in 850 bytes} [Thu May 31 22:54:03 2018] GET /df_cart/cart_count/ => generated 14 bytes in 2 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+Building prefix dict from the default dictionary ...
+Loading model from cache /tmp/jieba.cache
+Loading model cost 1.418 seconds.
+Prefix dict has been built succesfully.
+[pid: 43165|app: 0|req: 10/31] 192.168.18.8 () {44 vars in 908 bytes} [Thu May 31 22:54:05 2018] GET /detail/4/ => generated 8259 bytes in 1578 msecs (HTTP/1.1 200) 5 headers in 184 bytes (1 switches on core 1)
+[pid: 43170|app: 0|req: 13/32] 192.168.18.8 () {44 vars in 847 bytes} [Thu May 31 22:54:06 2018] GET /df_cart/cart_count/ => generated 14 bytes in 1 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43167|app: 0|req: 6/33] 192.168.18.8 () {44 vars in 851 bytes} [Thu May 31 22:54:08 2018] GET /df_cart/cart_add/4/1/ => generated 35 bytes in 30 msecs (HTTP/1.1 200) 5 headers in 144 bytes (1 switches on core 1)
+[pid: 43170|app: 0|req: 14/34] 192.168.18.8 () {44 vars in 913 bytes} [Thu May 31 22:54:09 2018] GET /df_cart/cart/ => generated 13337 bytes in 34 msecs (HTTP/1.1 200) 4 headers in 125 bytes (1 switches on core 1)
+[pid: 43168|app: 0|req: 5/35] 192.168.18.8 () {44 vars in 851 bytes} [Thu May 31 22:54:10 2018] GET /df_cart/cart_count/ => generated 14 bytes in 3 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43165|app: 0|req: 11/36] 192.168.18.8 () {44 vars in 871 bytes} [Thu May 31 22:54:12 2018] GET /df_cart/cart_edit_status/4/1/ => generated 20 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43167|app: 0|req: 7/37] 192.168.18.8 () {44 vars in 873 bytes} [Thu May 31 22:54:13 2018] GET /df_cart/cart_edit_status/16/1/ => generated 20 bytes in 32 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43168|app: 0|req: 6/38] 192.168.18.8 () {44 vars in 873 bytes} [Thu May 31 22:54:14 2018] GET /df_cart/cart_edit_status/16/0/ => generated 20 bytes in 16 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43165|app: 0|req: 12/39] 192.168.18.8 () {44 vars in 873 bytes} [Thu May 31 22:54:16 2018] GET /df_cart/cart_edit_status/16/1/ => generated 20 bytes in 15 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43168|app: 0|req: 7/40] 192.168.18.8 () {44 vars in 873 bytes} [Thu May 31 22:54:18 2018] GET /df_cart/cart_edit_status/00/0/ => generated 20 bytes in 21 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43168|app: 0|req: 8/41] 192.168.18.8 () {44 vars in 873 bytes} [Thu May 31 22:54:19 2018] GET /df_cart/cart_edit_status/00/1/ => generated 20 bytes in 28 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+[pid: 43168|app: 0|req: 9/42] 192.168.18.8 () {44 vars in 873 bytes} [Thu May 31 22:54:21 2018] GET /df_cart/cart_edit_status/00/0/ => generated 20 bytes in 23 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 15/43] 192.168.18.8 () {44 vars in 873 bytes} [Thu May 31 22:54:22 2018] GET /df_cart/cart_edit_status/14/1/ => generated 20 bytes in 12 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 0)
+[pid: 43170|app: 0|req: 16/44] 192.168.18.8 () {44 vars in 873 bytes} [Thu May 31 22:54:23 2018] GET /df_cart/cart_edit_status/14/0/ => generated 20 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 114 bytes (1 switches on core 1)
+...brutally killing workers...
+Gracefully killing worker 2 (pid: 43167)...
+Gracefully killing worker 3 (pid: 43168)...
+Gracefully killing worker 1 (pid: 43165)...
+Gracefully killing worker 4 (pid: 43170)...
+worker 1 buried after 2 seconds
+worker 3 buried after 2 seconds
+worker 4 buried after 2 seconds
+worker 2 buried after 3 seconds
+binary reloading uWSGI...
+chdir() to /home/python/Desktop/django/daily_fresh
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 3 mapped to socket 0 (192.168.18.8:8000)
+running /home/python/.virtualenvs/venv/bin/uwsgi
+[uWSGI] getting INI configuration from uwsgi.ini
+*** Starting uWSGI 2.0.17 (64bit) on [Thu May 31 23:00:03 2018] ***
+compiled with version: 5.4.0 20160609 on 18 May 2018 05:38:27
+os: Linux-4.4.0-127-generic #153-Ubuntu SMP Sat May 19 10:58:46 UTC 2018
+nodename: ubuntu
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 2
+current working directory: /home/python/Desktop/django/daily_fresh
+detected binary path: /home/python/.virtualenvs/venv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/python/Desktop/django/daily_fresh/
+your processes number limit is 11801
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 inherited INET address 192.168.18.8:8000 fd 3
+Python version: 3.5.2 (default, Nov 23 2017, 16:37:01)  [GCC 5.4.0 20160609]
+Python main interpreter initialized at 0xc6cef0
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+added [ to pythonpath.
+WSGI app 0 (mountpoint='') ready in 22 seconds on interpreter 0xc6cef0 pid: 43163 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 43163)
+spawned uWSGI worker 1 (pid: 43537, cores: 2)
+spawned uWSGI worker 2 (pid: 43538, cores: 2)
+spawned uWSGI worker 3 (pid: 43539, cores: 2)
+spawned uWSGI worker 4 (pid: 43540, cores: 2)

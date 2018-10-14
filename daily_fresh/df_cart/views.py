@@ -1,32 +1,43 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from django.http import request, HttpResponse, JsonResponse
-from django.db.models import aggregates
+from django.http import HttpResponse, JsonResponse
+from django.db.models import aggregates, F
+from django.core.cache import cache
 
 from .models import *
-from df_user.views import is_login
+from df_user.views import authenticated
 
 
-# 购物车
-@is_login
+@authenticated
 def cart(request):
-    user_id = int(request.session.get('user_id'))
-    cart_list = CartInfo.objects.filter(user_id=user_id)
-    cart_list = cart_list[::-1]
+    """
+    功能：购物车页面
+    :param request: 默认request参数
+    :return: 购物车页面
+    """
+    # 获取用户id，构建查询集
+    user_id = request.session.get('user_id')
+    cart_list = CartInfo.objects.filter(user_id=user_id).order_by('-pk')
+    # 迫使查询集执行数据库查询，并产生查询集缓存，避免重复执行数据库查询
+    bool(cart_list)
     length = len(cart_list)
     context = {'font_flag': 'cart', 'cart_list': cart_list, 'length': length}
     return render(request, 'df_cart/cart.html', context)
 
 
-# 购物车商品数量显示
 def cart_count(request):
-    user_id = request.session.get('user_id', False)
+    """
+    功能：查询购物车商品数量，处理ajax请求
+    :param request: 默认request参数
+    :return: JsonReponse对象
+    """
+    user_id = request.session.get('user_id')        # QueryDict对象的get方法的默认返回值为None
     if user_id:
         if 'count' in request.COOKIES:
             count = request.COOKIES['count']
             return JsonResponse({'count': count})
         else:
-            count = len(CartInfo.objects.filter(user_id=int(user_id)))
+            count = CartInfo.objects.filter(user_id=int(user_id)).count()
             resp = JsonResponse({'count': count})
             resp.set_cookie('count', count)
             return resp
@@ -34,39 +45,41 @@ def cart_count(request):
         return JsonResponse({'count': 0})
 
 
-# 添加商品到购物车
 def cart_add(request, gid, count):
-    # if reverse('df_cart:cart') in request.META['HTTP_REFERER']:
+    """
+    功能：添加商品到购物车
+    :param request: 默认request参数
+    :param gid: 商品id
+    :param count: 商品的数量
+    :return: JsonReponse对象
+    """
     # 检测用户未登录，设置COOKIES['HTTP_REFERER']，保存request.META['HTTP_REFERER']中的原页面地址
     if not request.session.get('user_id'):
-        resp = JsonResponse({'is_login': False})
+        resp = JsonResponse({'authenticated': False})
         resp.set_cookie('HTTP_REFERER', request.META.get('HTTP_REFERER'))
         return resp
     else:
         # 将获取的参数转化为int类型
         gid = int(gid)
         count = int(count)
-        # 获取用户id，依据user_id查询用户购物车列表,并求得列表中元素的个数
+        # 获取用户id，
         user_id = int(request.session.get('user_id'))
+        # 依据user_id查询用户购物车列表,并求得列表中元素的个数，尝试进一步根据goods_id获取指定cart
         cart_list = CartInfo.objects.filter(user_id=user_id)
+        carts = cart_list.filter(goods_id=gid)
         length = len(cart_list)
-        # 遍历用户购物车列表，若商品已存在，则对其count属性进行维护,并返回商品类别的个数
-        for item in cart_list:
-            if item.goods_id == gid:
-                item.count = item.count+count
-                item.save()
-                return JsonResponse({'is_login': True, 'cart_count': length})
-
-        # 若商品不在用户购物车列表中，则新建Cart对象，赋值并保存
-        cart = CartInfo()
-        cart.user_id = user_id
-        cart.goods_id = gid
-        cart.count = count
-        cart.save()
-        resp = JsonResponse({'is_login': True, 'cart_count': length + 1})
-        # 设置COOKIES
-        resp.set_cookie('count', length+1)
-        return resp
+        # 若商品已存在，则对其count属性进行维护,并返回商品类别的个数
+        if bool(carts):
+            carts.update(count=F('count')+count)
+            return JsonResponse({'authenticated': True, 'cart_count': length})
+        else:
+            # 若商品不在用户购物车列表中，则新建Cart对象，赋值并保存
+            cart = CartInfo(user_id=user_id, goods_id=gid, count=count)
+            cart.save()
+            # 构造JsonResponse对象，并设置COOKIES
+            resp = JsonResponse({'authenticated': True, 'cart_count': length + 1})
+            resp.set_cookie('count', length+1)
+            return resp
 
 
 # 购物车商品编辑
@@ -126,7 +139,7 @@ def cart_edit_status(request, gid, is_selected):
 
 # 从购物车删除商品
 def cart_delete(request, gid):
-    user_id = int(request.session['user_id'])
+    user_id = request.session['user_id']
     cart = CartInfo.objects.get(user_id=user_id, goods_id=int(gid))
     cart.delete()
     # count = request.COOKIES['count']

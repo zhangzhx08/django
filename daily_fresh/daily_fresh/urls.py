@@ -23,6 +23,7 @@ urlpatterns = [
     # url(r'^df_goods/', include('df_goods.urls', namespace='df_goods')),
     url(r'^df_cart/', include('df_cart.urls', namespace='df_cart')),
     url(r'^df_order/', include('df_order.urls', namespace='df_order')),
-    url('^search/', include('haystack.urls')),
+    url(r'^tinymce/', include('tinymce.urls', namespace='tinymce')),
+    url('^search/', include('haystack.urls', namespace='haystack')),
 
 ]

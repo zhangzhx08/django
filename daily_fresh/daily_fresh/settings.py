@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+# 项目根目录，保持默认即可，无需修改
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,15 +23,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'pklp+d)csr9+3eo7b+53zymwaehvp2nwbw&rioho26fc)h#%a4'
 
+
+# 调试模式开关，在开发阶段开启，在生产阶段关闭
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 # DEBUG = False
 
+
+# 允许访问网址的IP地址，设置为*表示任何IP地址都可以访问网站
 ALLOWED_HOSTS = ['*']
 
 
+# 注册应用app，直接在列表中添加app名字
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +51,8 @@ INSTALLED_APPS = [
     'haystack',
 ]
 
+
+# 中间件配置，如需自定义中间件，直接向列表添加即可
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,8 +63,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+# 根路由文件
 ROOT_URLCONF = 'daily_fresh.urls'
 
+
+# 模板设置，新建项目需要配置DIRS项，新项目默认为空列表[]，需要设置为[os.path.join(BASE_DIR, 'templates')]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -74,17 +85,19 @@ TEMPLATES = [
     },
 ]
 
+
+# WSGI_APPLICATION项保持为默认即可，无需修改
 WSGI_APPLICATION = 'daily_fresh.wsgi.application'
 
 
+# 数据库配置，Django默认数据库为sqlite，一般改为MySQL
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shopping',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': 3306,
         'USER': 'root',
         'PASSWORD': 'me',
@@ -95,7 +108,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -115,10 +127,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
+# 语言编码，默认为'en-us'，需修改为'zh-hans'
 LANGUAGE_CODE = 'zh-hans'
 
+# 时区，默认为'UTC'，需修改为'Asia/Shanghai'
 TIME_ZONE = 'Asia/Shanghai'
 
+# 以下三项保持默认即可，无需修改
 USE_I18N = True
 
 USE_L10N = True
@@ -129,45 +144,79 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+# 静态文件路由，默认为'/static/'，无需修改
 STATIC_URL = '/static/'
-STATIC_ROOT = '/var/www/daily_fresh/static/'
-
+# 静态文件根目录，包含css、js、image，貌似设置了STATICTILES_DIRS就不需要设置STATIC_ROOT了
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/')
+    os.path.join(BASE_DIR, 'static/'),
 ]
+# 静态文件根目录，包含css、js、image，部署使用
+# STATIC_ROOT = '/var/www/daily_fresh/static/'
 
-# 开发阶段的上传目录
+# 后台管理系统中查看图片资源的url，需要与MEDIA_ROOT保持一直，这样才能找到后台上传的图片
+MEDIA_URL = '/static/media/'
+# 后台管理系统的图片资源上传目录：开发阶段
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media/')
-# 部署后的上传文件目录
+# 后台管理系统的图片资源上传目录：生产阶段
 MEDIA_ROOT = '/var/www/daily_fresh/static/media/'
 
-# MEDIA_URL与MEDIA_ROOT必须保持一直，这样在后台上传的图片才能被准确的找到
-MEDIA_URL = '/static/media/'
 
-SESSION_ENGINE = 'redis_sessions.session'
-SESSION_REDIS_HOST = 'localhost'
-SESSION_REDIS_PORT = 6379
-SESSION_REDIS_DB = 0
-SESSION_REDIS_PASSWORD = ''
-SESSION_REDIS_PREFIX = 'session'
-
-
+# 【缓存】django_redis官方缓存配置
 CACHES = {
-    "default": {
-        "BACKEND": "redis_cache.cache.RedisCache",
-        "LOCATION": "localhost:6379",
-        'TIMEOUT': 60,
-    },
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'KEY_PREFIX': 'cache',
+        'TIMEOUT': 10,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'PASSWORD': ''
+        },
+    }
 }
 
+# 【session】django_redis官方缓存配置
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+SESSION_COOKIE_AGE = 60*60*2
 
+# django_redis_sessions官方配置
+"""
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS = {
+    'host': 'localhost',
+    'port': 6379,
+    'db': 0,
+    'password': '',
+    'prefix': 'session',
+    'socket_timeout': 1
+}
+"""
+# django_redis_cache官方缓存配置
+"""
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': ['localhost:6379', ],
+        'OPTIONS': {
+            'DB': 1,
+            'PASSWORD': '',
+            'PARSER_CLASS': 'redis.connection.HiredisParser',
+        },
+    },
+}
+"""
+
+
+# 【富文本编辑器配置】除此之外，还需要将tinymce注册到INSTALLED_APP中，并在根级url中包含tinymce.urls
 TINYMCE_DEFAULT_CONFIG = {
     'theme': 'advanced',
     'width': 600,
     'height': 300,
 }
 
-# 添加搜索引擎
+
+# 【搜索引擎】配置
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
@@ -176,5 +225,21 @@ HAYSTACK_CONNECTIONS = {
 }
 # 自动生成索引
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-
 # HAYSTACK_SEARCH_RESULTS_PER_PAGE = 1
+
+
+# 【celery配置】
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 50
+CELERY_WORKER_DISABLE_RATE_LIMITES = True
+
+CELERY_TASK_CREATE_MISSING_QUEUES = True
+CELERY_TASK_TIME_LIMIT = 60
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-cache'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TIMEZONE = 'Asia/Shanghai'

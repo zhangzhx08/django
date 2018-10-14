@@ -17,7 +17,7 @@
                 var gid = $(this).attr('id');
                 var url = '/df_cart/cart_add/' + gid + '/1/';
                 $.get(url, function (data) {
-                    if (data.is_login) {
+                    if (data.authenticated) {
                         $('#show_count').text(data.cart_count);
                     }else{
                         location.href = '{% url 'df_user:login' %}';

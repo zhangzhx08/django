@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
-from django.http import request, HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.db import transaction
 from .models import *
 from df_cart.models import *
 from df_user.models import *
-from df_user.views import is_login
+from df_user.views import authenticated
 from datetime import datetime
 
 
-@is_login
+@authenticated
 def place_order(request):
     site = UserInfo.objects.get(id=request.session.get('user_id')).siteinfo_set.get(is_default=True)
     cart_list = CartInfo.objects.filter(is_selected=True)

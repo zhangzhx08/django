@@ -56,9 +56,10 @@
                 url = '/df_cart/cart_add/'+goods_id+'/'+count+'/';
 
                 $.get(url, function (data) {
-                    if(data.is_login){
+                    if(data.authenticated){
                         $('#show_count').text(data.cart_count);
                     }else{
+                        {#alert('{% url 'df_user:login' %}');#}
                         location.href = '{% url 'df_user:login' %}';
                         {#$(location).attr('href', '{% url 'df_user:login' %}');#}
                     }

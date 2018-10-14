@@ -143,7 +143,7 @@
                 });
             }
             {% comment %}
-            {# 更新数据库中购物车里某种商品是否被选中,##使用get请求## #}
+            {# 更新数据库中购物车里某种商品是否被选中,**使用get传参数** #}
             function update_sql_status(elem){
                 var url = '{% url 'df_cart:cart_edit_status' %}';
                 if(elem.attr('id')==='check_all'){
